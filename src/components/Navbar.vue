@@ -5,7 +5,7 @@
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item has-text-white is-size-2 has-text-weight-bold" href="#">
-            Your App
+            {{brandName}}
           </a>
           <span role="button" tabindex="0" class="navbar-burger burger has-text-white" data-target="navbar-menu">
             <span></span>
@@ -26,5 +26,23 @@
       </div>
     </nav>
   </header>
+  {{menuItems}}
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      brandName: "Exchangario",
+      menuItems: [
+        { text: "Home" },
+        { text: "About" },
+        { text: "Faq" },
+        { text: "Login" },
+        { text: "Register" },
+      ]
+    }
+  }
+}
+</script>
 
