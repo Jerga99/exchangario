@@ -152,14 +152,14 @@
 
 export default {
   name: 'App'
-
-  // npm install --save css-loader@^5
-  // npm install --save sass-loader@^10
-  // npm install sass
 }
 </script>
 
 <style lang="scss">
+  @import 'assets/styles/variables.scss';
+  @import '~bulma/bulma.sass';
+  @import 'assets/styles/main.scss';
+
   .hero-section {
     position: relative;
   }
