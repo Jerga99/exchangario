@@ -1,34 +1,6 @@
 <template>
-  <div>
-    <!-- NAVBAR -->
-    <header class="header">
-      <nav class="navbar">
-        <div class="container">
-          <div class="navbar-brand">
-            <a class="navbar-item has-text-white is-size-2 has-text-weight-bold" href="#">
-              Your App
-            </a>
-            <span role="button" tabindex="0" class="navbar-burger burger has-text-white" data-target="navbar-menu">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </div>
-          <div id="navbar-menu" class="navbar-menu">
-            <div class="navbar-end">
-              <!-- Loop through the navigation items -->
-              <a class="navbar-item nav-home" href="#">Home</a>
-              <a class="navbar-item nav-style-guide" href="#">About</a>
-              <a class="navbar-item nav-features" href="#">FAQ</a>
-              <a class="navbar-item nav-tech" href="#">Login</a>
-              <a class="navbar-item nav-web" href="#">Register</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <!-- NAVBAR END -->
-
+  <div id="exchangario">
+    <exchange-navbar />
     <!-- HERO START -->
     <div class="hero-section">
       <section class="hero background-img is-large" :style="{ 'background-image': 'url(https://images.unsplash.com/photo-1517457210348-703079e57d4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80)' }">
@@ -149,9 +121,12 @@
 </template>
 
 <script>
-
+import ExchangeNavbar from "./components/Navbar.vue";
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    ExchangeNavbar
+  }
 }
 </script>
 
