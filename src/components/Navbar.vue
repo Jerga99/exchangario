@@ -15,18 +15,18 @@
         </div>
         <div id="navbar-menu" class="navbar-menu">
           <div class="navbar-end">
-            <!-- Loop through the navigation items -->
-            <a class="navbar-item nav-home" href="#">Home</a>
-            <a class="navbar-item nav-style-guide" href="#">About</a>
-            <a class="navbar-item nav-features" href="#">FAQ</a>
-            <a class="navbar-item nav-tech" href="#">Login</a>
-            <a class="navbar-item nav-web" href="#">Register</a>
+            <a
+              v-for="item in menuItems"
+              :key="item.text"
+              :href="item.link"
+              class="navbar-item nav-web">
+              {{item.text}}
+            </a>
           </div>
         </div>
       </div>
     </nav>
   </header>
-  {{menuItems}}
 </template>
 
 <script>
@@ -35,11 +35,11 @@ export default {
     return {
       brandName: "Exchangario",
       menuItems: [
-        { text: "Home" },
-        { text: "About" },
-        { text: "Faq" },
-        { text: "Login" },
-        { text: "Register" },
+        { text: "Home", link: "/" },
+        { text: "About", link: "/about" },
+        { text: "Faq", link: "/faq" },
+        { text: "Login", link: "/login" },
+        { text: "Register", link: "/register" },
       ]
     }
   }
