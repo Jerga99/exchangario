@@ -16,7 +16,7 @@
               >
               </figure>
               <div class="item-featured">
-                Icon
+                <font-awesome-icon icon="user-secret" />
               </div>
             </a>
             <div class="item-tags">
