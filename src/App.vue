@@ -1,6 +1,9 @@
 <template>
   <div id="exchangario">
-    <exchange-navbar />
+    <exchange-navbar
+      :title="brandName"
+      :items="menuItems"
+    />
     <exchange-hero />
     <exchangle-list />
     <exchange-pagination />
@@ -19,6 +22,18 @@ export default {
     ExchangeHero,
     ExchangleList,
     ExchangePagination
+  },
+  data() {
+    return {
+      brandName: "Exchangario",
+      menuItems: [
+        { text: "Home", link: "/" },
+        { text: "About", link: "/about" },
+        { text: "Faq", link: "/faq" },
+        { text: "Login", link: "/login" },
+        { text: "Register", link: "/register" },
+      ]
+    }
   }
 }
 </script>
