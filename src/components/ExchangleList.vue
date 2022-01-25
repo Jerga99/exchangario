@@ -1,6 +1,7 @@
 <template>
   <section class="posts">
     <div class="container">
+      {{exchanges}}
       <div class="posts-type">Latest Posts</div>
       <div class="columns is-multiline">
         <div class="column is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
@@ -54,6 +55,16 @@
     </div>
   </section>
 </template>
+<script>
+export default {
+  props: {
+    exchanges: {
+      type: Array,
+      required: true,
+    }
+  }
+}
+</script>
 
 <style scoped lang="scss">
   .posts {
