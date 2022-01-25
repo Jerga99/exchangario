@@ -1,7 +1,6 @@
 <template>
   <section class="posts">
     <div class="container">
-      {{exchanges}}
       <div class="posts-type">Latest Posts</div>
       <div class="columns is-multiline">
         <div
@@ -21,7 +20,13 @@
               </div>
             </a>
             <div class="item-tags">
-              <a class="button is-rounded" href="#" title="Some Title">#Art</a>
+              <a
+                v-for="tag in exchange.tags"
+                :key="tag"
+                class="button is-rounded"
+                href="#">
+                #{{tag}}
+              </a>
             </div>
             <h2
               class="title item-title is-size-4 has-text-weight-extra-bold">
