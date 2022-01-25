@@ -3,17 +3,13 @@
 
 <template>
   <div>
-    <home-page />
+    <router-view />
   </div>
 </template>
 
 <script>
-import HomePage from "./pages/Home.vue";
 export default {
-  name: 'App',
-  components: {
-    HomePage
-  }
+  name: 'App'
 }
 </script>
 
