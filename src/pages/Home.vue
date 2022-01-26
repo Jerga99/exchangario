@@ -6,6 +6,7 @@
     />
     <div class="counter-container">
       <div>Count: {{count}}</div>
+      <div>OtherCount: {{otherCount}}</div>
       <div>Is > 15: {{isBiggerThan15}}</div>
       <div>Exchange Length: {{exchangeLength}}</div>
       <button
@@ -23,6 +24,8 @@
 import ExchangleList from "../components/ExchangleList.vue";
 import ExchangePagination from "../components/Pagination.vue";
 import ExchangeHero from "../components/Hero.vue";
+import { ref } from "vue";
+
 export default {
   components: {
     ExchangleList,
@@ -30,8 +33,11 @@ export default {
     ExchangeHero
   },
   data() {
+    const count = ref(10);
+
     return {
-      count: 10,
+      count,
+      otherCount: count,
       exchanges: [{
         id: "ad7a1231238dasd",
         type: "product", // service or product
