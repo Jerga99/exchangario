@@ -81,6 +81,10 @@ a {
         font-weight: $weight-semibold;
         text-transform: uppercase;
 
+        &:focus {
+          background-color: transparent;
+        }
+
         &:hover {
           background-color: transparent;
           color: $primary;

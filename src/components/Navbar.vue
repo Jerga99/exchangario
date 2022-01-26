@@ -18,13 +18,13 @@
         </div>
         <div id="navbar-menu" class="navbar-menu">
           <div class="navbar-end">
-            <a
+            <router-link
               v-for="item in items"
               :key="item.text"
-              :href="item.link"
+              :to="item.link"
               class="navbar-item nav-web">
               {{item.text}}
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
