@@ -5,8 +5,9 @@
       :exchanges="exchanges"
     />
     <div class="counter-container">
-      {{count}}
-
+      <div>Count: {{count}}</div>
+      <div>Is > 15: {{isBiggerThan15}}</div>
+      <div>Exchange Length: {{exchangeLength}}</div>
       <button
         class="button is-primary"
         @click="increment"
@@ -55,6 +56,15 @@ export default {
         city: "Barcelona",
         tags: ["programming", "code"]
       }]
+    }
+  },
+  computed: {
+    exchangeLength() {
+      return this.exchanges.length;
+    },
+    isBiggerThan15() {
+      console.log("re-executing!");
+      return this.count > 15;
     }
   },
   methods: {
