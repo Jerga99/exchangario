@@ -1,7 +1,10 @@
 
 <template>
   <header class="header">
-    <nav class="navbar">
+    <nav
+      class="navbar"
+      :class="$route.path === '/' ? '' : 'with-background'"
+    >
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item has-text-white is-size-2 has-text-weight-bold" href="#">
