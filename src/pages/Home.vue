@@ -4,18 +4,9 @@
     <exchangle-list
       :exchanges="exchanges"
     />
-    <div class="counter-container">
-      <div>Count: {{count}}</div>
-      <div>OtherCount: {{otherCount}}</div>
-      <div>Is > 15: {{isBiggerThan15}}</div>
-      <div>Exchange Length: {{exchangeLength}}</div>
-      <button
-        class="button is-primary"
-        @click="increment"
-      >
-        Increment
-      </button>
-    </div>
+    <button @click="() => $store.dispatch('test')">
+      Test VUEX
+    </button>
     <exchange-pagination />
   </div>
 </template>
@@ -24,7 +15,6 @@
 import ExchangleList from "../components/ExchangleList.vue";
 import ExchangePagination from "../components/Pagination.vue";
 import ExchangeHero from "../components/Hero.vue";
-import { ref } from "vue";
 
 export default {
   components: {
@@ -33,11 +23,7 @@ export default {
     ExchangeHero
   },
   data() {
-    const count = ref(10);
-
     return {
-      count,
-      otherCount: count,
       exchanges: [{
         id: "ad7a1231238dasd",
         type: "product", // service or product
@@ -62,23 +48,6 @@ export default {
         city: "Barcelona",
         tags: ["programming", "code"]
       }]
-    }
-  },
-  computed: {
-    exchangeLength() {
-      return this.exchanges.length;
-    },
-    isBiggerThan15() {
-      console.log("re-executing!");
-      return this.count > 15;
-    }
-  },
-  methods: {
-    log() {
-      console.log("Hello World")
-    },
-    increment() {
-      this.count++;
     }
   }
 }
