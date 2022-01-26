@@ -4,6 +4,16 @@
     <exchangle-list
       :exchanges="exchanges"
     />
+    <div class="counter-container">
+      {{count}}
+
+      <button
+        class="button is-primary"
+        @click="increment"
+      >
+        Increment
+      </button>
+    </div>
     <exchange-pagination />
   </div>
 </template>
@@ -20,6 +30,7 @@ export default {
   },
   data() {
     return {
+      count: 10,
       exchanges: [{
         id: "ad7a1231238dasd",
         type: "product", // service or product
@@ -45,6 +56,21 @@ export default {
         tags: ["programming", "code"]
       }]
     }
+  },
+  methods: {
+    log() {
+      console.log("Hello World")
+    },
+    increment() {
+      this.count++;
+    }
   }
 }
 </script>
+
+<style scoped>
+ .counter-container {
+   padding: 200px;
+   font-size: 60px;
+ }
+</style>
