@@ -23,6 +23,9 @@ export default {
     exchanges() {
       return this.$store.state.exchanges;
     }
+  },
+  created() {
+    this.$store.dispatch("getExchanges");
   }
 }
 </script>
