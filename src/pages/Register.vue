@@ -8,6 +8,7 @@
             <div class="field">
               <div class="control">
                 <input
+                  v-model="form.email"
                   class="input is-large"
                   type="email"
                   placeholder="Email"
@@ -21,6 +22,7 @@
             <div class="field">
               <div class="control">
                 <input
+                  v-model="form.username"
                   class="input is-large"
                   type="text"
                   placeholder="Username"
@@ -30,6 +32,7 @@
             <div class="field">
               <div class="control">
                 <input
+                  v-model="form.password"
                   class="input is-large"
                   type="password"
                   placeholder="Password"
@@ -39,6 +42,7 @@
             <div class="field">
               <div class="control">
                 <input
+                  v-model="form.passwordConfirmation"
                   class="input is-large"
                   type="password"
                   placeholder="Repeat the password"
@@ -46,6 +50,7 @@
               </div>
             </div>
             <button
+              @click="register"
               type="button"
               class="button is-block is-info is-large is-fullwidth">
               Sign Up
@@ -63,6 +68,21 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      form: {
+        email: "",
+        username: "",
+        password: "",
+        passwordConfirmation: ""
+      }
+    }
+  },
+  methods: {
+    register() {
+      alert(JSON.stringify(this.form));
+    }
+  }
 }
 </script>
 <style scoped>
