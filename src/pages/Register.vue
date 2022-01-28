@@ -50,7 +50,7 @@
               </div>
             </div>
             <button
-              @click="register"
+              @click="() => register(form)"
               :disabled="isProcessing"
               type="button"
               class="button is-block is-info is-large is-fullwidth">
@@ -69,6 +69,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import useRegister from "../composition/useRegister";
 export default {
   data() {
     return {
@@ -80,15 +81,13 @@ export default {
       }
     }
   },
+  setup() {
+    return useRegister();
+  },
   computed: mapState("user", {
     error: ({register}) => register.error,
     isProcessing: ({register}) => register.isProcessing
-  }),
-  methods: {
-    register() {
-      this.$store.dispatch("user/register", this.form);
-    }
-  }
+  })
 }
 </script>
 <style scoped>
