@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     register() {
-      alert(JSON.stringify(this.form));
+      this.$store.dispatch("user/register", this.form);
     }
   }
 }
