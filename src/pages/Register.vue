@@ -51,6 +51,7 @@
             </div>
             <button
               @click="register"
+              :disabled="isProcessing"
               type="button"
               class="button is-block is-info is-large is-fullwidth">
               Sign Up
@@ -63,12 +64,11 @@
           <a href="../">Need Help?</a>
         </p>
       </div>
-      E: {{error}}
-      P: {{isProcessing}}
     </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -80,22 +80,10 @@ export default {
       }
     }
   },
-  // lazy
-  computed: {
-
-    error() {
-      return this.$store.state.user.register.error;
-    },
-    isProcessing() {
-      return this.$store.state.user.register.isProcessing;
-    }
-  },
-  watch: {
-    "form.password": function(value, oldValue) {
-      console.log("C: ",value);
-      console.log("O: ",oldValue);
-    }
-  },
+  computed: mapState({
+    error: ({user}) => user.register.error,
+    isProcessing: ({user}) => user.register.isProcessing
+  }),
   methods: {
     register() {
       this.$store.dispatch("user/register", this.form);
