@@ -1,13 +1,19 @@
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default {
   namespaced: true,
   actions: {
-    register(_, {email, password}) {
-      console.log(email);
-      console.log(password);
+    async register(_, {email, password}) {
+      const auth = getAuth();
 
-      // Firebase functionality to register user
+      try {
+        const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+        alert("User has been registered!");
+        return userCredentials.user;
+      } catch(e) {
+        console.error(e.message);
+      }
     }
   }
 }
