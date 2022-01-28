@@ -80,12 +80,20 @@ export default {
       }
     }
   },
+  // lazy
   computed: {
+
     error() {
       return this.$store.state.user.register.error;
     },
     isProcessing() {
       return this.$store.state.user.register.isProcessing;
+    }
+  },
+  watch: {
+    "form.password": function(value, oldValue) {
+      console.log("C: ",value);
+      console.log("O: ",oldValue);
     }
   },
   methods: {
