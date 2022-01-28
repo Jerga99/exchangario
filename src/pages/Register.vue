@@ -80,9 +80,9 @@ export default {
       }
     }
   },
-  computed: mapState({
-    error: ({user}) => user.register.error,
-    isProcessing: ({user}) => user.register.isProcessing
+  computed: mapState("user", {
+    error: ({register}) => register.error,
+    isProcessing: ({register}) => register.isProcessing
   }),
   methods: {
     register() {
