@@ -63,6 +63,8 @@
           <a href="../">Need Help?</a>
         </p>
       </div>
+      E: {{error}}
+      P: {{isProcessing}}
     </div>
   </div>
 </template>
@@ -76,6 +78,14 @@ export default {
         password: "",
         passwordConfirmation: ""
       }
+    }
+  },
+  computed: {
+    error() {
+      return this.$store.state.user.register.error;
+    },
+    isProcessing() {
+      return this.$store.state.user.register.isProcessing;
     }
   },
   methods: {
