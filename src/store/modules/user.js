@@ -1,5 +1,7 @@
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../db";
 
 export default {
   namespaced: true,
@@ -12,19 +14,28 @@ export default {
     }
   },
   actions: {
-    async register({commit, dispatch}, {email, password}) {
+    async register({commit, dispatch}, {email, password, username}) {
       commit("setRegisterIsProcessing", true);
       commit("setRegisterError", "");
 
       try {
-        const userCredentials = await createUserWithEmailAndPassword(getAuth(), email, password);
-        return userCredentials.user;
+        const { user } = await createUserWithEmailAndPassword(getAuth(), email, password);
+        await dispatch("createUserProfile", {
+          id: user.uid,
+          username,
+          avatar: "https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png",
+          credit: 0,
+          exchanges: []
+        })
       } catch(e) {
         commit("setRegisterError", e.message);
         dispatch("toast/error", e.message, {root: true});
       } finally {
         commit("setRegisterIsProcessing", false);
       }
+    },
+    async createUserProfile(_, {id, ...profile}) {
+      await setDoc(doc(db, "users", id), profile);
     }
   },
   mutations: {
