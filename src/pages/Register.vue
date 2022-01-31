@@ -68,8 +68,9 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
 import useRegister from "../composition/useRegister";
+import useAuth from "../composition/useAuth";
+
 export default {
   data() {
     return {
@@ -82,12 +83,11 @@ export default {
     }
   },
   setup() {
-    return useRegister();
-  },
-  computed: mapState("user", {
-    error: ({register}) => register.error,
-    isProcessing: ({register}) => register.isProcessing
-  })
+    return {
+      ...useRegister(),
+      ...useAuth()
+    };
+  }
 }
 </script>
 <style scoped>
