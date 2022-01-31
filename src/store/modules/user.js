@@ -1,5 +1,5 @@
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../db";
 
@@ -14,6 +14,15 @@ export default {
     }
   },
   actions: {
+    onAuthChange() {
+      onAuthStateChanged(getAuth(), (user) => {
+        if (user) {
+          console.log(user);
+        } else {
+          console.log("Logged out");
+        }
+      })
+    },
     async register({commit, dispatch}, {email, password, username}) {
       commit("setRegisterIsProcessing", true);
       commit("setRegisterError", "");

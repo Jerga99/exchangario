@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faStar)
 
 const app = createApp(App);
+store.dispatch("user/onAuthChange");
 
 app
   .use(store)
