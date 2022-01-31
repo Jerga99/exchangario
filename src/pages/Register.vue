@@ -50,7 +50,7 @@
               </div>
             </div>
             <button
-              @click="() => register(form)"
+              @click="register"
               :disabled="isProcessing"
               type="button"
               class="button is-block is-info is-large is-fullwidth">
@@ -68,7 +68,6 @@
   </div>
 </template>
 <script>
-import useRegister from "../composition/useRegister";
 import useAuth from "../composition/useAuth";
 
 export default {
@@ -83,22 +82,21 @@ export default {
     }
   },
   setup() {
-    return {
-      ...useRegister(),
-      ...useAuth()
-    };
+    return useAuth();
   },
   watch: {
     error(message) {
       if (message) { alert(message); }
     },
-    // isProcessing = false
-    // prevProcessing = true
-    // we should not have any error
     isProcessing(processing, prevProcessing) {
       if (!processing && prevProcessing && !this.error ) {
         this.$router.push("/");
       }
+    }
+  },
+  methods: {
+    register() {
+      this.$store.dispatch("user/register", this.form)
     }
   }
 }
