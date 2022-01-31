@@ -87,6 +87,19 @@ export default {
       ...useRegister(),
       ...useAuth()
     };
+  },
+  watch: {
+    error(message) {
+      if (message) { alert(message); }
+    },
+    // isProcessing = false
+    // prevProcessing = true
+    // we should not have any error
+    isProcessing(processing, prevProcessing) {
+      if (!processing && prevProcessing && !this.error ) {
+        this.$router.push("/");
+      }
+    }
   }
 }
 </script>
