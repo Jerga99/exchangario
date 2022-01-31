@@ -8,7 +8,7 @@ export default {
   state() {
     return {
       data: null,
-      register: {
+      auth: {
         isProcessing: false,
         error: ""
       }
@@ -37,8 +37,8 @@ export default {
       commit("setUser", useWithProfile);
     },
     async register({commit, dispatch}, {email, password, username}) {
-      commit("setRegisterIsProcessing", true);
-      commit("setRegisterError", "");
+      commit("setAuthIsProcessing", true);
+      commit("setAuthError", "");
 
       try {
         const { user } = await createUserWithEmailAndPassword(getAuth(), email, password);
@@ -50,10 +50,10 @@ export default {
           exchanges: []
         })
       } catch(e) {
-        commit("setRegisterError", e.message);
+        commit("setAuthError", e.message);
         dispatch("toast/error", e.message, {root: true});
       } finally {
-        commit("setRegisterIsProcessing", false);
+        commit("setAuthIsProcessing", false);
       }
     },
     async createUserProfile(_, {id, ...profile}) {
@@ -61,11 +61,11 @@ export default {
     }
   },
   mutations: {
-    setRegisterIsProcessing(state, isProcessing) {
-      state.register.isProcessing = isProcessing;
+    setAuthIsProcessing(state, isProcessing) {
+      state.auth.isProcessing = isProcessing;
     },
-    setRegisterError(state, error) {
-      state.register.error = error;
+    setAuthError(state, error) {
+      state.auth.error = error;
     },
     setUser(state, user) {
       state.data = user;
