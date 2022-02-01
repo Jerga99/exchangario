@@ -30,10 +30,12 @@
       </div>
     </nav>
     IS AUTH: {{isAuthenticated}}
+    USER: {{user?.username}}
   </header>
 </template>
 
 <script>
+import useAuth from '../composition/useAuth'
 export default {
   props: {
     title: {
@@ -45,11 +47,9 @@ export default {
       required: true,
     }
   },
-  computed: {
-    isAuthenticated() {
-      return this.$store.getters["user/isAuthenticated"];
-    }
-  },
+  setup() {
+    return useAuth();
+  }
 }
 </script>
 
