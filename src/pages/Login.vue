@@ -29,6 +29,7 @@
             </div>
             <button
               @click="login"
+              :disabled="isProcessing"
               type="button"
               class="button is-block is-info is-large is-fullwidth"
             >
@@ -46,6 +47,7 @@
   </div>
 </template>
 <script>
+import useAuth from '../composition/useAuth';
 export default {
   data() {
     return {
@@ -55,9 +57,12 @@ export default {
       }
     }
   },
+  setup() {
+    return useAuth();
+  },
   methods: {
     login() {
-      alert(JSON.stringify(this.form))
+      this.$store.dispatch("user/login", this.form);
     }
   }
 }

@@ -1,5 +1,11 @@
 
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword
+} from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../db";
 
@@ -54,6 +60,19 @@ export default {
           credit: 0,
           exchanges: []
         })
+      } catch(e) {
+        commit("setAuthError", e.message);
+        dispatch("toast/error", e.message, {root: true});
+      } finally {
+        commit("setAuthIsProcessing", false);
+      }
+    },
+    async login({commit, dispatch}, {email, password}) {
+      commit("setAuthIsProcessing", true);
+      commit("setAuthError", "");
+
+      try {
+        await signInWithEmailAndPassword(getAuth(), email, password);
       } catch(e) {
         commit("setAuthError", e.message);
         dispatch("toast/error", e.message, {root: true});
