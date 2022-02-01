@@ -24,9 +24,7 @@ export default {
       menuItems: [
         { text: "Home", link: "/" },
         { text: "About", link: "/about" },
-        { text: "Faq", link: "/faq" },
-        { text: "Login", link: "/login" },
-        { text: "Register", link: "/register" },
+        { text: "Faq", link: "/faq" }
       ],
     }
   }
