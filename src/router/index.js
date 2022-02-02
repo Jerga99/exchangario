@@ -27,18 +27,28 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: LoginPage
+    component: LoginPage,
+    meta: { onlyGuestUser: true }
   },
   {
     path: "/register",
     name: "Register",
-    component: RegisterPage
+    component: RegisterPage,
+    meta: { onlyGuestUser: true }
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, _, next) => {
+  if (to.meta.onlyGuestUser) {
+    next({name: "Home"});
+  } else {
+    next();
+  }
 })
 
 export default router;

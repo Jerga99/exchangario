@@ -84,13 +84,6 @@ export default {
   setup() {
     return useAuth();
   },
-  watch: {
-    isProcessing(processing, prevProcessing) {
-      if (!processing && prevProcessing && !this.error ) {
-        this.$router.push("/");
-      }
-    }
-  },
   methods: {
     register() {
       this.$store.dispatch("user/register", this.form)
