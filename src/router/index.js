@@ -7,6 +7,7 @@ import AboutPage from "../pages/About";
 import FaqPage from "../pages/Faq";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
+import ProfilePage from "../pages/Profile";
 
 import { getAuth } from "firebase/auth";
 
@@ -25,6 +26,11 @@ const routes = [
     path: "/faq",
     name: "Faq",
     component: FaqPage
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: ProfilePage
   },
   {
     path: "/login",
