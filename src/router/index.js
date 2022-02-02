@@ -8,6 +8,8 @@ import FaqPage from "../pages/Faq";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 
+import { getAuth } from "firebase/auth";
+
 const routes = [
   {
     path: "/",
@@ -43,9 +45,15 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, _, next) => {
+router.beforeEach(async (to, _, next) => {
+  const isAuth = await getAuth().currentUser;
+
   if (to.meta.onlyGuestUser) {
-    next({name: "Home"});
+    if (isAuth) {
+      next({name: "Home"});
+    } else {
+      next();
+    }
   } else {
     next();
   }
