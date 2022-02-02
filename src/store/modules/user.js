@@ -26,12 +26,17 @@ export default {
     }
   },
   actions: {
-    onAuthChange({dispatch}) {
+    onAuthChange({dispatch, commit}, callback) {
+      commit("setAuthIsProcessing", true);
       onAuthStateChanged(getAuth(), async (user) => {
         if (user) {
-          dispatch('getUserProfile', user);
+          await dispatch('getUserProfile', user);
+          commit("setAuthIsProcessing", false);
+          callback(user);
         } else {
           console.log("Logged out");
+          commit("setAuthIsProcessing", false);
+          callback(null);
         }
       })
     },
