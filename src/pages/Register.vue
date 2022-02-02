@@ -84,6 +84,11 @@ export default {
   setup() {
     return useAuth();
   },
+  watch: {
+    isAuthenticated(isAuth) {
+      if (isAuth) { this.$router.push("/"); }
+    }
+  },
   methods: {
     register() {
       this.$store.dispatch("user/register", this.form)
