@@ -8,17 +8,17 @@
               <figure class="image  header-icon user-profile-image">
                 <img
                   class="is-rounded"
-                  src="http://via.placeholder.com/100x100"/>
+                  :src="user.avatar"/>
               </figure>
             </div>
             <div class="column is-4-tablet is-10-mobile name">
               <div class="user-info">
                 <p>
-                  <span class="title is-bold">John Doe</span>
+                  <span class="title is-bold">{{user.username}}</span>
                   <br/>
                 </p>
                 <p class="tagline">
-                  Very short user info
+                  {{user.info}}
                 </p>
               </div>
               <profile-modal
@@ -36,7 +36,7 @@
               <p class="stat-key">Opportunities</p>
             </div>
             <div class="stats-tab column is-2-tablet is-4-mobile has-text-centered">
-              <p class="stat-val">1000</p>
+              <p class="stat-val">{{user.credit}}</p>
               <p class="stat-key">Credits</p>
             </div>
           </div>
