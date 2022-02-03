@@ -33,6 +33,24 @@
                 v-model="userProfile.info"
                 class="input">
             </div>
+            <div class="field">
+              <label class="title">Address</label>
+              <input
+                v-model="userProfile.address"
+                class="input">
+            </div>
+            <div class="field">
+              <label class="title">Country</label>
+              <input
+                v-model="userProfile.country"
+                class="input">
+            </div>
+            <div class="field">
+              <label class="title">Phone</label>
+              <input
+                v-model="userProfile.phone"
+                class="input">
+            </div>
           </form>
         </section>
         <footer class="modal-card-foot">
@@ -64,7 +82,9 @@
     },
     methods: {
       updateProfile() {
-        console.log(this.userProfile);
+        this.$store.dispatch("user/updateProfile", {
+          data: this.userProfile
+        })
       }
     }
   }

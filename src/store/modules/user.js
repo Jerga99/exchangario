@@ -40,6 +40,9 @@ export default {
         }
       })
     },
+    updateProfile(_, { data }) {
+      console.log(data);
+    },
     async getUserProfile({commit}, user) {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
