@@ -21,7 +21,7 @@
                   Very short user info
                 </p>
               </div>
-              <button class="button is-success">Update Info</button>
+              <profile-modal />
             </div>
             <div
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
@@ -88,7 +88,11 @@
 </template>
 <script>
 import useAuth from '../composition/useAuth';
+import ProfileModal from "../components/ProfileModal.vue";
 export default {
+  components: {
+    ProfileModal
+  },
   setup() {
     return useAuth();
   },
