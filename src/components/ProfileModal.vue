@@ -83,7 +83,8 @@
     methods: {
       updateProfile() {
         this.$store.dispatch("user/updateProfile", {
-          data: this.userProfile
+          data: this.userProfile,
+          onSuccess: () => this.isOpen = false
         })
       }
     }

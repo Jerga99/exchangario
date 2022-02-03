@@ -40,11 +40,12 @@ export default {
         }
       })
     },
-    async updateProfile({commit, dispatch}, { data }) {
+    async updateProfile({commit, dispatch}, { data, onSuccess }) {
       const userRef = doc(db, "users", data.id);
       await updateDoc(userRef, data);
       commit("updateProfile", data);
       dispatch("toast/success", "Profile has been updated!", {root: true});
+      onSuccess();
     },
     async getUserProfile({commit}, user) {
       const docRef = doc(db, "users", user.uid);
