@@ -21,7 +21,9 @@
                   Very short user info
                 </p>
               </div>
-              <profile-modal />
+              <profile-modal
+                :user="user"
+              />
             </div>
             <div
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
