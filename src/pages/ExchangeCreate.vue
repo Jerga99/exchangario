@@ -108,6 +108,9 @@
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
+
 export default {
   data() {
     return {
@@ -123,9 +126,29 @@ export default {
       }
     }
   },
+  validations() {
+    return {
+      form: {
+        title: { required },
+        description: { required },
+        type: { required },
+        image: { required },
+        price: {required },
+        country: { required },
+        city: { required }
+      }
+    }
+  },
+  setup () {
+    return { v$: useVuelidate() }
+  },
   methods: {
-    createExchange() {
-      alert(JSON.stringify(this.form));
+    async createExchange() {
+      const isValid = await this.v$.$validate();
+
+      if (isValid) {
+        alert(JSON.stringify(this.form));
+      }
     }
   }
 }
