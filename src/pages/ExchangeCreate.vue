@@ -24,8 +24,13 @@
                 placeholder="Some Nice Product"
               />
               <div
+                v-if="v$.form.title.$error"
                 class="form-error">
-                <div class="help is-danger">Error Message</div>
+                <div
+                  v-if="v$.form.title.required.$invalid"
+                  class="help is-danger">
+                  Title is required!
+                </div>
               </div>
             </div>
           </div>
@@ -37,6 +42,15 @@
                 class="textarea"
                 placeholder="Some catchy description about product">
               </textarea>
+              <div
+                v-if="v$.form.description.$error"
+                class="form-error">
+                <div
+                  v-if="v$.form.description.required.$invalid"
+                  class="help is-danger">
+                  Description is required!
+                </div>
+              </div>
             </div>
           </div>
           <div class="field">
@@ -47,6 +61,15 @@
                 class="input"
                 type="text"
                 placeholder="https://unsplash....">
+              <div
+                v-if="v$.form.image.$error"
+                class="form-error">
+                <div
+                  v-if="v$.form.image.required.$invalid"
+                  class="help is-danger">
+                  Image is required!
+                </div>
+              </div>
             </div>
           </div>
           <div class="field">
@@ -57,6 +80,15 @@
                 class="input"
                 type="number"
                 placeholder="249">
+              <div
+                v-if="v$.form.price.$error"
+                class="form-error">
+                <div
+                  v-if="v$.form.price.required.$invalid"
+                  class="help is-danger">
+                  Price is required!
+                </div>
+              </div>
             </div>
           </div>
           <div class="field">
@@ -67,6 +99,15 @@
                 class="input"
                 type="text"
                 placeholder="Slovakia">
+              <div
+                v-if="v$.form.country.$error"
+                class="form-error">
+                <div
+                  v-if="v$.form.country.required.$invalid"
+                  class="help is-danger">
+                  Country is required!
+                </div>
+              </div>
             </div>
           </div>
           <div class="field">
@@ -77,6 +118,15 @@
                 class="input"
                 type="text"
                 placeholder="Bratislava">
+              <div
+                v-if="v$.form.city.$error"
+                class="form-error">
+                <div
+                  v-if="v$.form.city.required.$invalid"
+                  class="help is-danger">
+                  City is required!
+                </div>
+              </div>
             </div>
           </div>
 
