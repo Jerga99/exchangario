@@ -8,6 +8,7 @@ import FaqPage from "../pages/Faq";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import ProfilePage from "../pages/Profile";
+import ExchangeCreatePage from "../pages/ExchangeCreate";
 
 import { getAuth } from "firebase/auth";
 
@@ -26,6 +27,12 @@ const routes = [
     path: "/faq",
     name: "Faq",
     component: FaqPage
+  },
+  {
+    path: "/exchanges/new",
+    name: "ExchangeCreate",
+    component: ExchangeCreatePage,
+    meta: { onlyAuthUser: true }
   },
   {
     path: "/profile",

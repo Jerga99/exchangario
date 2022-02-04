@@ -30,6 +30,11 @@
             </router-link>
             <template v-if="isAuthenticated">
               <router-link
+                to="/exchanges/new"
+                class="navbar-item">
+                New Exchange
+              </router-link>
+              <router-link
                 to="/profile"
                 class="navbar-item">
                 Profile
