@@ -24,17 +24,12 @@
                 placeholder="Some Nice Product"
               />
               <div
-                v-if="v$.form.title.$error"
+                v-for="error of v$.form.title.$errors"
+                :key="error.$uid"
                 class="form-error">
                 <div
-                  v-if="v$.form.title.required.$invalid"
                   class="help is-danger">
-                  Title is required!
-                </div>
-                <div
-                  v-if="v$.form.title.minLength.$invalid"
-                  class="help is-danger">
-                  Title must be at least 10 characters long!
+                  {{error.$message}}
                 </div>
               </div>
             </div>
@@ -48,12 +43,12 @@
                 placeholder="Some catchy description about product">
               </textarea>
               <div
-                v-if="v$.form.description.$error"
+                v-for="error of v$.form.description.$errors"
+                :key="error.$uid"
                 class="form-error">
                 <div
-                  v-if="v$.form.description.required.$invalid"
                   class="help is-danger">
-                  Description is required!
+                  {{error.$message}}
                 </div>
               </div>
             </div>
@@ -67,17 +62,12 @@
                 type="text"
                 placeholder="https://unsplash....">
               <div
-                v-if="v$.form.image.$error"
+                v-for="error of v$.form.image.$errors"
+                :key="error.$uid"
                 class="form-error">
                 <div
-                  v-if="v$.form.image.required.$invalid"
                   class="help is-danger">
-                  Image is required!
-                </div>
-                <div
-                  v-if="v$.form.image.url.$invalid"
-                  class="help is-danger">
-                  Image has wrong url format!
+                  {{error.$message}}
                 </div>
               </div>
             </div>
@@ -91,17 +81,12 @@
                 type="number"
                 placeholder="249">
               <div
-                v-if="v$.form.price.$error"
+                v-for="error of v$.form.price.$errors"
+                :key="error.$uid"
                 class="form-error">
                 <div
-                  v-if="v$.form.price.required.$invalid"
                   class="help is-danger">
-                  Price is required!
-                </div>
-                <div
-                  v-if="v$.form.price.minValue.$invalid"
-                  class="help is-danger">
-                  Price must be at least 1!
+                  {{error.$message}}
                 </div>
               </div>
             </div>
@@ -115,12 +100,12 @@
                 type="text"
                 placeholder="Slovakia">
               <div
-                v-if="v$.form.country.$error"
+                v-for="error of v$.form.country.$errors"
+                :key="error.$uid"
                 class="form-error">
                 <div
-                  v-if="v$.form.country.required.$invalid"
                   class="help is-danger">
-                  Country is required!
+                  {{error.$message}}
                 </div>
               </div>
             </div>
@@ -134,12 +119,12 @@
                 type="text"
                 placeholder="Bratislava">
               <div
-                v-if="v$.form.city.$error"
+                v-for="error of v$.form.city.$errors"
+                :key="error.$uid"
                 class="form-error">
                 <div
-                  v-if="v$.form.city.required.$invalid"
                   class="help is-danger">
-                  City is required!
+                  {{error.$message}}
                 </div>
               </div>
             </div>
