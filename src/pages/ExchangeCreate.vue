@@ -31,6 +31,11 @@
                   class="help is-danger">
                   Title is required!
                 </div>
+                <div
+                  v-if="v$.form.title.minLength.$invalid"
+                  class="help is-danger">
+                  Title must be at least 10 characters long!
+                </div>
               </div>
             </div>
           </div>
@@ -69,6 +74,11 @@
                   class="help is-danger">
                   Image is required!
                 </div>
+                <div
+                  v-if="v$.form.image.url.$invalid"
+                  class="help is-danger">
+                  Image has wrong url format!
+                </div>
               </div>
             </div>
           </div>
@@ -87,6 +97,11 @@
                   v-if="v$.form.price.required.$invalid"
                   class="help is-danger">
                   Price is required!
+                </div>
+                <div
+                  v-if="v$.form.price.minValue.$invalid"
+                  class="help is-danger">
+                  Price must be at least 1!
                 </div>
               </div>
             </div>
@@ -159,7 +174,7 @@
 
 <script>
 import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required, minLength, minValue, url } from '@vuelidate/validators'
 
 export default {
   data() {
@@ -179,11 +194,17 @@ export default {
   validations() {
     return {
       form: {
-        title: { required },
+        title: {
+          required,
+          minLength: minLength(10)
+        },
         description: { required },
         type: { required },
-        image: { required },
-        price: {required },
+        image: { required, url },
+        price: {
+          required,
+          minValue: minValue(1)
+        },
         country: { required },
         city: { required }
       }
