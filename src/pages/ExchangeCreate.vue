@@ -113,6 +113,7 @@
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, minValue, url, helpers } from '@vuelidate/validators'
 import FormErrors from "../components/FormErrors.vue";
+import { supportedFileType } from "../helpers/validators";
 
 export default {
   components: {
@@ -141,7 +142,10 @@ export default {
         },
         description: { required },
         type: { required },
-        image: { required, url },
+        image: {
+          required,
+          url,
+          supportedFileType: helpers.withMessage("Invalid format!", supportedFileType)},
         price: {
           required,
           minValue: minValue(1)
