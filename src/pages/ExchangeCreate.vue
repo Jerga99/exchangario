@@ -159,7 +159,7 @@
 
 <script>
 import useVuelidate from '@vuelidate/core'
-import { required, minLength, minValue, url } from '@vuelidate/validators'
+import { required, minLength, minValue, url, helpers } from '@vuelidate/validators'
 
 export default {
   data() {
@@ -180,8 +180,8 @@ export default {
     return {
       form: {
         title: {
-          required,
-          minLength: minLength(10)
+          required: helpers.withMessage("Title cannot by empty!", required),
+          minLength: helpers.withMessage("Title length should be at least 10!", minLength(10)),
         },
         description: { required },
         type: { required },
