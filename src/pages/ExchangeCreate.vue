@@ -23,15 +23,7 @@
                 type="text"
                 placeholder="Some Nice Product"
               />
-              <div
-                v-for="error of v$.form.title.$errors"
-                :key="error.$uid"
-                class="form-error">
-                <div
-                  class="help is-danger">
-                  {{error.$message}}
-                </div>
-              </div>
+              <form-errors :errors="v$.form.title.$errors" />
             </div>
           </div>
           <div class="field">
@@ -42,15 +34,7 @@
                 class="textarea"
                 placeholder="Some catchy description about product">
               </textarea>
-              <div
-                v-for="error of v$.form.description.$errors"
-                :key="error.$uid"
-                class="form-error">
-                <div
-                  class="help is-danger">
-                  {{error.$message}}
-                </div>
-              </div>
+              <form-errors :errors="v$.form.description.$errors" />
             </div>
           </div>
           <div class="field">
@@ -61,15 +45,7 @@
                 class="input"
                 type="text"
                 placeholder="https://unsplash....">
-              <div
-                v-for="error of v$.form.image.$errors"
-                :key="error.$uid"
-                class="form-error">
-                <div
-                  class="help is-danger">
-                  {{error.$message}}
-                </div>
-              </div>
+              <form-errors :errors="v$.form.image.$errors" />
             </div>
           </div>
           <div class="field">
@@ -80,15 +56,7 @@
                 class="input"
                 type="number"
                 placeholder="249">
-              <div
-                v-for="error of v$.form.price.$errors"
-                :key="error.$uid"
-                class="form-error">
-                <div
-                  class="help is-danger">
-                  {{error.$message}}
-                </div>
-              </div>
+              <form-errors :errors="v$.form.price.$errors" />
             </div>
           </div>
           <div class="field">
@@ -99,15 +67,7 @@
                 class="input"
                 type="text"
                 placeholder="Slovakia">
-              <div
-                v-for="error of v$.form.country.$errors"
-                :key="error.$uid"
-                class="form-error">
-                <div
-                  class="help is-danger">
-                  {{error.$message}}
-                </div>
-              </div>
+              <form-errors :errors="v$.form.country.$errors" />
             </div>
           </div>
           <div class="field">
@@ -118,15 +78,7 @@
                 class="input"
                 type="text"
                 placeholder="Bratislava">
-              <div
-                v-for="error of v$.form.city.$errors"
-                :key="error.$uid"
-                class="form-error">
-                <div
-                  class="help is-danger">
-                  {{error.$message}}
-                </div>
-              </div>
+              <form-errors :errors="v$.form.city.$errors" />
             </div>
           </div>
 
@@ -160,8 +112,12 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, minValue, url, helpers } from '@vuelidate/validators'
+import FormErrors from "../components/FormErrors.vue";
 
 export default {
+  components: {
+    FormErrors
+  },
   data() {
     return {
       form: {
