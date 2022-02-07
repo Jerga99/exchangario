@@ -18,6 +18,10 @@ export default {
       const exchanges = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
 
       commit("setExchanges", exchanges);
+    },
+    async createExchange(_, { data, onSuccess }) {
+      console.log(data);
+      onSuccess();
     }
   },
   mutations: {

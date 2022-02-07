@@ -122,22 +122,24 @@ import useVuelidate from '@vuelidate/core'
 import { required, minLength, minValue, url, helpers } from '@vuelidate/validators'
 import FormErrors from "../components/FormErrors.vue";
 
+const setupInitialData = () => ({
+  title: "",
+  description: "",
+  type: "product",
+  image: "",
+  price: null,
+  country: "",
+  city: "",
+  tags: []
+})
+
 export default {
   components: {
     FormErrors
   },
   data() {
     return {
-      form: {
-        title: "",
-        description: "",
-        type: "product",
-        image: "",
-        price: null,
-        country: "",
-        city: "",
-        tags: []
-      }
+      form: setupInitialData()
     }
   },
   validations() {
@@ -170,7 +172,13 @@ export default {
       const isValid = await this.v$.$validate();
 
       if (isValid) {
-        alert(JSON.stringify(this.form));
+        this.v$.$reset();
+        this.$store.dispatch("exchange/createExchange", {
+          data: this.form,
+          onSuccess: () => {
+            this.form = setupInitialData();
+          }
+        })
       }
     },
     handleTags(event) {
