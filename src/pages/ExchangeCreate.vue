@@ -87,6 +87,7 @@
             <label class="label">Tags</label>
             <div class="control">
               <input
+                @input="handleTags"
                 class="input"
                 type="text"
                 placeholder="programming">
@@ -113,7 +114,6 @@
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, minValue, url, helpers } from '@vuelidate/validators'
 import FormErrors from "../components/FormErrors.vue";
-import { supportedFileType } from "../helpers/validators";
 
 export default {
   components: {
@@ -144,8 +144,8 @@ export default {
         type: { required },
         image: {
           required,
-          url,
-          supportedFileType: helpers.withMessage("Invalid format!", supportedFileType)},
+          url
+        },
         price: {
           required,
           minValue: minValue(1)
@@ -164,6 +164,19 @@ export default {
 
       if (isValid) {
         alert(JSON.stringify(this.form));
+      }
+    },
+    handleTags(event) {
+      const { value } = event.target;
+
+      if (
+        value &&
+        value.trim().length > 1 &&
+        (value.substr(-1) === "," || value.substr(-1) === " ")) {
+
+        const _value = value.split(",")[0].trim();
+        console.log(_value);
+        event.target.value = "";
       }
     }
   }
