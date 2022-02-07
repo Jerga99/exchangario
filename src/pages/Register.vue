@@ -69,7 +69,7 @@
 <script>
 import useAuth from "../composition/useAuth";
 import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { required, sameAs, helpers, email } from '@vuelidate/validators'
 import FormErrors from "../components/FormErrors.vue";
 
 export default {
@@ -89,10 +89,13 @@ export default {
   validations() {
     return {
       form: {
-        email: { required },
+        email: { required, email },
         username: { required },
         password: { required },
-        passwordConfirmation: { required }
+        passwordConfirmation: {
+          required,
+          sameAs: helpers.withMessage("Must be same as the password", sameAs(this.form.password))
+        }
       }
     }
   },
