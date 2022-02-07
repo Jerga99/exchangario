@@ -91,6 +91,13 @@
                 class="input"
                 type="text"
                 placeholder="programming">
+              <div
+                v-for="tag in form.tags"
+                :key="tag"
+                class="tag is-primary is-medium"
+              >
+                {{tag}}
+              </div>
             </div>
           </div>
           <div class="field is-grouped">
@@ -175,7 +182,7 @@ export default {
         (value.substr(-1) === "," || value.substr(-1) === " ")) {
 
         const _value = value.split(",")[0].trim();
-        console.log(_value);
+        this.form.tags.push(_value);
         event.target.value = "";
       }
     }
