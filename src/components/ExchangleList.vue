@@ -38,7 +38,6 @@
             </h2>
             <div class="level">
               <div class="level-left">
-                <!-- <div class="item-author">{{exchange.user}}</div> -->
                 <div class="item-author">Filip Jerga</div>
               </div>
               <div class="level-right">
