@@ -182,7 +182,11 @@ export default {
         (value.substr(-1) === "," || value.substr(-1) === " ")) {
 
         const _value = value.split(",")[0].trim();
-        this.form.tags.push(_value);
+
+        if (!this.form.tags.includes(_value)) {
+          this.form.tags.push(_value);
+        }
+
         event.target.value = "";
       }
     }
