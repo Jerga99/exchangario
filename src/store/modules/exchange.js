@@ -1,7 +1,11 @@
 
 
 import { db } from "../../db";
-import { getDocs, query, where, collectionGroup, doc, addDoc, collection } from "firebase/firestore";
+import {
+  getDocs, getDoc, doc, addDoc,
+  query, where,
+  collectionGroup, collection
+} from "firebase/firestore";
 import slugify from "slugify";
 
 export default {
@@ -23,6 +27,10 @@ export default {
 
       const querySnap = await getDocs(docQuery);
       const exchange = querySnap.docs[0].data();
+
+      const userSnap = await getDoc(exchange.user);
+      exchange.user = userSnap.data();
+
       commit("setExchange", exchange);
     },
     async getExchanges({commit}) {
