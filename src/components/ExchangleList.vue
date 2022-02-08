@@ -9,7 +9,7 @@
           class="column is-12-mobile is-6-tablet is-4-widescreen is-6-desktop">
           <div class="item post-card bottom-border">
             <router-link
-              :to="{name: 'ExchangeDetail', params: {id: exchange.id}}"
+              :to="{name: 'ExchangeDetail', params: {slug: exchange.slug}}"
               class="item-link"
             >
               <figure
