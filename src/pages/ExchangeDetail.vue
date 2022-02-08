@@ -11,7 +11,7 @@
                 {{exchange.title}}
               </h1>
               <h2 class="subtitle">
-                service
+                {{exchange.type}}
               </h2>
               <!-- Exchange User Start -->
               <div class="user-tile">
@@ -21,7 +21,7 @@
                   </figure>
                 </div>
                 <div class="user-tile-author center">
-                  <h3 class="user-tile-author-name">by Some User</h3>
+                  <h3 class="user-tile-author-name">by {{exchange.user?.id}}</h3>
                 </div>
               </div>
               <!-- Exchange User End -->
@@ -33,7 +33,7 @@
                     <figure class="image is-4by2">
                       <!-- Exchange Image -->
                       <img
-                        src="http://via.placeholder.com/600x600"
+                        :src="exchange.image"
                         alt="Placeholder image"
                       >
                     </figure>
@@ -41,7 +41,7 @@
                   <div class="card-content">
                     <div class="content m-b-sm">
                       <div class="media-content">
-                        <span class="title is-2">$1000
+                        <span class="title is-2">${{exchange.price}}
                         </span>
                       </div>
                     </div>
@@ -78,14 +78,14 @@
               <div class="more-details-title">
                 Details
               </div>
-              <div class="more-details-item">Country: England</div>
-              <div class="more-details-item">City: London</div>
+              <div class="more-details-item">Country: {{exchange.country}}</div>
+              <div class="more-details-item">City: {{exchange.city}}</div>
             </div>
           </div>
           <div class="section product-description p-t-none">
             <div class="product-description-title">Exchange Info</div>
             <div class="product-description-details">
-              <p>Exchange description information</p>
+              <p>{{exchange.description}}</p>
             </div>
           </div>
         </div>
