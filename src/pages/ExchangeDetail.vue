@@ -8,7 +8,7 @@
           <div class="columns">
             <div class="column is-9">
               <h1 class="title">
-                Some Exchange
+                {{exchange.title}}
               </h1>
               <h2 class="subtitle">
                 service
@@ -98,6 +98,11 @@ export default {
   created() {
     const { slug } = this.$route.params;
     this.$store.dispatch("exchange/getExchangeBySlug", slug);
+  },
+  computed: {
+    exchange() {
+      return this.$store.state.exchange.item;
+    }
   }
 }
 </script>

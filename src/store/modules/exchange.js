@@ -1,20 +1,29 @@
 
 
 import { db } from "../../db";
-import { getDocs, query, collectionGroup, doc, addDoc, collection } from "firebase/firestore";
+import { getDocs, query, where, collectionGroup, doc, addDoc, collection } from "firebase/firestore";
 import slugify from "slugify";
 
 export default {
   namespaced: true,
   state() {
     return {
-      items: []
+      items: [],
+      item: {}
     }
   },
   actions: {
     // context -> state, commit
-    async getExchangeBySlug(_, slug) {
-      console.log(slug);
+    async getExchangeBySlug({commit}, slug) {
+      commit("setExchange", {});
+      const docQuery = query(
+        collection(db, "exchanges"),
+        where("slug", "==", slug)
+      );
+
+      const querySnap = await getDocs(docQuery);
+      const exchange = querySnap.docs[0].data();
+      commit("setExchange", exchange);
     },
     async getExchanges({commit}) {
       const exchangeQuery = query(collectionGroup(db, "exchanges"));
@@ -40,6 +49,10 @@ export default {
   mutations: {
     setExchanges(state, exchanges) {
       state.items = exchanges;
+    },
+    setExchange(state, exchange) {
+      debugger
+      state.item = exchange;
     }
   }
 }
