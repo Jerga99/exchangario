@@ -1,5 +1,6 @@
 <template>
   <exchange-modal
+    ref="exchangeModal"
     :onModalSubmit="updateProfile"
   >
     <form>
@@ -67,11 +68,16 @@
         userProfile: { ...this.user }
       }
     },
+    computed: {
+      modal() {
+        return this.$refs.exchangeModal
+      }
+    },
     methods: {
-      updateProfile({onSuccess}) {
+      updateProfile() {
         this.$store.dispatch("user/updateProfile", {
           data: this.userProfile,
-          onSuccess
+          onSuccess: () => this.modal.close()
         })
       }
     }

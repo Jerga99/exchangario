@@ -2,14 +2,14 @@
 <template>
   <div>
     <template v-if="$slots.activator">
-      <div @click="isOpen = true">
+      <div @click="open">
         <slot
           name="activator" />
       </div>
     </template>
     <button
       v-else
-      @click="isOpen = true"
+      @click="open"
       class="button is-block is-success is-light is-fullwidth">Update Info
     </button>
     <div :class="['modal', {'is-active': isOpen}]">
@@ -18,7 +18,7 @@
         <header class="modal-card-head">
           <p class="modal-card-title">Update Data</p>
           <button
-            @click="isOpen = false"
+            @click="close"
             class="delete"
             aria-label="close"></button>
         </header>
@@ -31,7 +31,7 @@
             class="button is-success">
             Save changes
           </button>
-          <button @click="isOpen = false" class="button">Cancel</button>
+          <button @click="close" class="button">Cancel</button>
         </footer>
       </div>
     </div>
@@ -55,8 +55,14 @@ export default {
   methods: {
     submitModal() {
       this.onModalSubmit({
-        onSuccess: () => this.isOpen = false
+        onSuccess: this.close
       });
+    },
+    open() {
+      this.isOpen = true
+    },
+    close() {
+      this.isOpen = false
     }
   }
 }
