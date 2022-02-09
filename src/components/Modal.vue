@@ -19,6 +19,7 @@
         </section>
         <footer class="modal-card-foot">
           <button
+            @click="submitModal"
             class="button is-success">
             Save changes
           </button>
@@ -32,9 +33,20 @@
 <script>
 
 export default {
+  props: {
+    onModalSubmit: {
+      type: Function,
+      required: false
+    }
+  },
   data() {
     return {
       isOpen: false
+    }
+  },
+  methods: {
+    submitModal() {
+      this.onModalSubmit();
     }
   }
 }
