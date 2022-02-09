@@ -40,6 +40,13 @@
           class="input">
       </div>
     </form>
+
+    <template #activator>
+      <button class="button is-block is-primary is-light is-fullwidth">
+        Custom button
+      </button>
+    </template>
+
   </exchange-modal>
 </template>
 
