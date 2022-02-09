@@ -57,15 +57,14 @@
     },
     data () {
       return {
-        isOpen: false,
         userProfile: { ...this.user }
       }
     },
     methods: {
-      updateProfile() {
+      updateProfile({onSuccess}) {
         this.$store.dispatch("user/updateProfile", {
           data: this.userProfile,
-          onSuccess: () => this.isOpen = false
+          onSuccess
         })
       }
     }
