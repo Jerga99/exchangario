@@ -37,8 +37,13 @@
           <div class="control">
             <div class="select">
               <select :disabled="isPriceExchange">
-                <option>Exchange 1</option>
-                <option>Exchange 2</option>
+                <option
+                  v-for="exchange in availableExchanges"
+                  :key="exchange.slug"
+                  :value="exchange"
+                >
+                  {{exchange.title}}
+                </option>
               </select>
             </div>
           </div>
@@ -70,6 +75,10 @@ export default {
   props: {
     exchange: {
       type: Object,
+      required: true
+    },
+    availableExchanges: {
+      type: Array,
       required: true
     }
   },

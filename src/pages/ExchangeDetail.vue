@@ -50,7 +50,10 @@
                         </span>
                       </div>
                     </div>
-                    <exchange-deal-modal :exchange="exchange" />
+                    <exchange-deal-modal
+                      :exchange="exchange"
+                      :availableExchanges="userExchanges"
+                    />
                     <div class="content">
                       <ul class="m-t-none">
                         <li>
@@ -104,11 +107,17 @@ export default {
     this.$store.dispatch("exchange/getExchangeBySlug", slug);
   },
   computed: {
+    user() {
+      return this.$store.state.user.data;
+    },
     exchange() {
       return this.$store.state.exchange.item;
     },
     exchangeUser() {
       return this.exchange.user;
+    },
+    userExchanges() {
+      return this.user?.exchanges || [];
     }
   }
 }
