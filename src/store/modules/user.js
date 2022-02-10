@@ -6,7 +6,7 @@ import {
   signOut,
   signInWithEmailAndPassword
 } from "firebase/auth";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, query, collection, where, getDocs } from "firebase/firestore";
 import { db } from "../../db";
 
 export default {
@@ -51,10 +51,20 @@ export default {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
       const userProfile = docSnap.data();
+
+      const docQuery = query(
+        collection(db, "exchanges"),
+        where("user", "==", docRef)
+      );
+
+      const querySnap = await getDocs(docQuery);
+      const exchanges = querySnap.docs.map(doc => doc.data());
+
       const useWithProfile = {
         id: user.uid,
         email: user.email,
-        ...userProfile
+        ...userProfile,
+        exchanges
       }
 
       commit("setUser", useWithProfile);
