@@ -50,7 +50,7 @@
                         </span>
                       </div>
                     </div>
-                    <exchange-deal-modal />
+                    <exchange-deal-modal :exchange="exchange" />
                     <div class="content">
                       <ul class="m-t-none">
                         <li>

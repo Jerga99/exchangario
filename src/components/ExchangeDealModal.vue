@@ -2,10 +2,10 @@
 <template>
   <exchange-modal :onModalSubmit="createOpportunity">
     <div class="deal">
-      <div class="deal-highlight">Filip's Offer</div>
+      <div class="deal-highlight">{{exchange.user.username}}'s Offer</div>
       <div class="deal-wrapper">
-        <div>Offering Service</div>
-        <div>Programming Lessons</div>
+        <div>Offering {{exchange.type}}</div>
+        <div>{{exchange.title}}</div>
       </div>
       <div class="deal-highlight">Your Offer</div>
       <div class="counter-offer">
@@ -17,11 +17,11 @@
             Yes
           </label>
         </div>
-        <div class="field disabled">
+        <div class="field">
           <label class="label">How Much Credit ?</label>
           <div class="control">
             <input
-              :disabled="true"
+              v-model="selectedPrice"
               class="input"
               type="number"
               placeholder="40">
@@ -64,6 +64,17 @@ import ExchangeModal from "./Modal.vue";
 export default {
   components: {
     ExchangeModal
+  },
+  props: {
+    exchange: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      selectedPrice: null
+    }
   },
   methods: {
     createOpportunity() {
