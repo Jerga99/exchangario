@@ -55,6 +55,7 @@
           <span>Your price is: </span>
           <span class="deal-highlight">{{selectedExchange.price}}$</span>
         </div>
+        OFFERED PRICE: {{offeredPrice}}
         <div
           class="price price">
           You are offering the exact same amount
@@ -93,9 +94,23 @@ export default {
       isPriceExchange: false,
     }
   },
+  computed: {
+    offeredPrice() {
+      if (this.isPriceExchange) {
+        return this.selectedPrice;
+      } else if (this.selectedExchange) {
+        return this.selectedExchange.price;
+      }
+
+      return null;
+    }
+  },
   watch: {
     isPriceExchange(value) {
       if (value) { this.selectedExchange = null; }
+      else {
+        this.selectedPrice = null;
+      }
     }
   },
   methods: {
