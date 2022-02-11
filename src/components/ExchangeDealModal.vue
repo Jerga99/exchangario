@@ -51,11 +51,11 @@
             </div>
           </div>
         </div>
-        <div v-if="selectedExchange">
+        <div v-if="offeredPrice">
           <span>Your price is: </span>
-          <span class="deal-highlight">{{selectedExchange.price}}$</span>
+          <span class="deal-highlight">{{offeredPrice}}$</span>
         </div>
-        OFFERED PRICE: {{offeredPrice}}
+        PercentageDifference: {{percentageDifference}}%
         <div
           class="price price">
           You are offering the exact same amount
@@ -103,6 +103,11 @@ export default {
       }
 
       return null;
+    },
+    percentageDifference() {
+      if (!this.offeredPrice) { return null; }
+      const priceDifference = this.offeredPrice - this.exchange.price;
+      return (priceDifference / this.exchange.price) * 100;
     }
   },
   watch: {
