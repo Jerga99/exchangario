@@ -23,7 +23,12 @@ export default {
   getters: {
     isAuthenticated(state) {
       return !!state.data;
-    }
+    },
+    isExchangeOwner: state => exchangeUserId => (
+      state.data &&
+      exchangeUserId &&
+      state.data.id === exchangeUserId
+    )
   },
   actions: {
     onAuthChange({dispatch, commit}, callback) {
