@@ -28,6 +28,7 @@
         <footer class="modal-card-foot">
           <button
             @click="submitModal"
+            :disabled="isDisabled"
             class="button is-success">
             Save changes
           </button>
@@ -45,6 +46,10 @@ export default {
     onModalSubmit: {
       type: Function,
       required: false
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
