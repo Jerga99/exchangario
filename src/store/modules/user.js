@@ -63,7 +63,9 @@ export default {
       );
 
       const querySnap = await getDocs(docQuery);
-      const exchanges = querySnap.docs.map(doc => doc.data());
+      const exchanges = querySnap.docs.map(
+        doc => ({...doc.data(), id: doc.id})
+      );
 
       const useWithProfile = {
         id: user.uid,

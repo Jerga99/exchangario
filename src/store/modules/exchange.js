@@ -27,6 +27,7 @@ export default {
 
       const querySnap = await getDocs(docQuery);
       const exchange = querySnap.docs[0].data();
+      exchange.id = querySnap.docs[0].id;
 
       const userSnap = await getDoc(exchange.user);
       exchange.user = userSnap.data();
