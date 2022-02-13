@@ -55,6 +55,20 @@
                       :exchange="exchange"
                       :availableExchanges="userExchanges"
                     />
+                    <button
+                     v-if="isExchangeOwner"
+                     disabled
+                     class="button is-fullwidth is-large is-danger is-outlined"
+                    >
+                      Yours Exchange
+                    </button>
+                    <router-link
+                      v-if="!isAuth"
+                      to="/login"
+                      class="button is-fullwidth is-large is-success is-outlined"
+                    >
+                      Login to make an offer
+                    </router-link>
                     <div class="content">
                       <ul class="m-t-none">
                         <li>
