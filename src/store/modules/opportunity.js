@@ -44,6 +44,23 @@ export default {
 
       commit("setOpportunities", {resource: "opportunities", opportunities})
     },
+    async getSendOpportunities({rootState, dispatch, commit}) {
+      const { id } = rootState.user.data;
+      if (!id) {
+        dispatch("toast/error", "User is not logged in!", {root: true});
+      }
+
+      const opportunityQuery = query(
+        collection(db, "opportunities"), where("fromUser", "==", doc(db, "users", id))
+      );
+
+      const opportunitiesSnap = await getDocs(opportunityQuery);
+      const opportunities = await Promise.all(opportunitiesSnap.docs.map(doc =>
+        extractDataFromOpportunity(doc.data(), doc.id)
+      ))
+
+      commit("setOpportunities", {resource: "sendOpportunities", opportunities})
+    },
     async createOpportunity({dispatch}, {data, onSuccess}) {
       const opportunity = {
         title: data.title,

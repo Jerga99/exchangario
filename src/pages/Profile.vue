@@ -33,7 +33,7 @@
             <div
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
               <p class="stat-val">Sent</p>
-              <p class="stat-key">Opportunities</p>
+              <p class="stat-key">{{sendOpportunities.length}} Opportunities</p>
             </div>
             <div class="stats-tab column is-2-tablet is-4-mobile has-text-centered">
               <p class="stat-val">{{user.credit}}</p>
@@ -110,7 +110,10 @@ export default {
   computed: {
     opportunities() {
       return this.$store.state.opportunity.opportunities
-    }
+    },
+    sendOpportunities() {
+      return this.$store.state.opportunity.sendOpportunities
+    },
   },
   watch: {
     isAuthenticated(isAuth) {
@@ -119,6 +122,7 @@ export default {
   },
   created() {
     this.$store.dispatch("opportunity/getOpportunities");
+    this.$store.dispatch("opportunity/getSendOpportunities");
   }
 }
 </script>
