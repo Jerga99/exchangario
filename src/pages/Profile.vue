@@ -103,6 +103,9 @@ export default {
       if (!isAuth) { this.$router.push("/"); }
     }
   },
+  created() {
+    this.$store.dispatch("opportunity/getOpportunities");
+  }
 }
 </script>
 

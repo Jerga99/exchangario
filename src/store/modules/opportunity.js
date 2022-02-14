@@ -1,10 +1,27 @@
 
 import { db } from "../../db";
-import { doc, Timestamp, addDoc, collection } from "firebase/firestore";
+import { doc, Timestamp, addDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 export default {
   namespaced: true,
   actions: {
+    async getOpportunities({rootState, dispatch}) {
+      const { id } = rootState.user.data;
+      if (!id) {
+        dispatch("toast/error", "User is not logged in!", {root: true});
+      }
+
+      const opportunityQuery = query(
+        collection(db, "opportunities"), where("toUser", "==", doc(db, "users", id))
+      );
+
+      const opportunitiesSnap = await getDocs(opportunityQuery);
+      const opportunities = opportunitiesSnap.docs.map(doc => ({
+        ...doc.data(), id: doc.id
+      }))
+
+      console.log( opportunities);
+    },
     async createOpportunity({dispatch}, {data, onSuccess}) {
       const opportunity = {
         title: data.title,
