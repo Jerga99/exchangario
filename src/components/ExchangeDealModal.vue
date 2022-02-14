@@ -144,23 +144,17 @@ export default {
   },
   methods: {
     createOpportunity({onSuccess}) {
-      const opportunity = {
+      const data = {
         title: this.exchange.title,
         fromUserId: this.user.id,
-        fromExchangeId: null,
+        fromExchangeId: this.selectedExchange?.id,
         toExchangeId: this.exchange.id,
         toUserId: this.exchange.user.id,
-        price: null
-      }
-
-      if (this.isPriceExchange) {
-        opportunity.price = this.selectedPrice
-      } else {
-        opportunity.fromExchangeId = this.selectedExchange.id
+        price: this.selectedPrice
       }
 
       this.$store.dispatch("opportunity/createOpportunity", {
-        opportunity,
+        data,
         onSuccess
       })
 
