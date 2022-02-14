@@ -50,7 +50,8 @@ export default {
         createdAt: Timestamp.fromDate(new Date()),
         toUser: doc(db, "users", data.toUserId),
         fromUser: doc(db, "users", data.fromUserId),
-        toExchange: doc(db, "exchanges", data.toExchangeId)
+        toExchange: doc(db, "exchanges", data.toExchangeId),
+        status: "pending"
       }
 
       if (data.fromExchangeId) {

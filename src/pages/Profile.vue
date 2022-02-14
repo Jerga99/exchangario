@@ -67,7 +67,7 @@
                       <p class="title is-6"><b>Request:</b> {{opportunity.title}}</p>
                       <p class="subtitle is-6">
                         <span
-                          class="tag is-dark subtitle">Pending</span>
+                          class="tag is-dark subtitle">{{opportunity.status}}</span>
                       </p>
                     </div>
                   </div>
