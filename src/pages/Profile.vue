@@ -28,7 +28,7 @@
             <div
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
               <p class="stat-val">Received</p>
-              <p class="stat-key">Opportunities</p>
+              <p class="stat-key">{{opportunities.length}} Opportunities</p>
             </div>
             <div
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
@@ -97,6 +97,11 @@ export default {
   },
   setup() {
     return useAuth();
+  },
+  computed: {
+    opportunities() {
+      return this.$store.state.opportunity.opportunities
+    }
   },
   watch: {
     isAuthenticated(isAuth) {
