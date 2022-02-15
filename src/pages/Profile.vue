@@ -27,12 +27,14 @@
             </div>
             <div
               @click="selectedOpportunities = 'received'"
+              :class="{'is-active': selectedOpportunities === 'received'}"
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
               <p class="stat-val">Received</p>
               <p class="stat-key">{{opportunities.length}} Opportunities</p>
             </div>
             <div
               @click="selectedOpportunities = 'sent'"
+              :class="{'is-active': selectedOpportunities === 'sent'}"
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
               <p class="stat-val">Sent</p>
               <p class="stat-key">{{sendOpportunities.length}} Opportunities</p>
@@ -57,6 +59,11 @@
                     <img :src="opportunity.fromExchange.image"/>
                   </figure>
                 </div>
+                <div v-else class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="https://images.unsplash.com/photo-1579621970795-87facc2f976d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=40"/>
+                  </figure>
+                </div>
                 <div class="card-content">
                   <div class="media">
                     <div class="media-content">
@@ -70,6 +77,11 @@
                       <p class="title is-6"><b>Request:</b> {{opportunity.title}}</p>
                       <p class="subtitle is-6">
                         <span
+                          :class="[
+                            {'is-success': opportunity.status === 'accepted'},
+                            {'is-danger': opportunity.status === 'declined'},
+                            {'is-warning': opportunity.status === 'pending'}
+                          ]"
                           class="tag is-dark subtitle">{{opportunity.status}}</span>
                       </p>
                     </div>
@@ -123,6 +135,11 @@
                       </p>
                       <p class="subtitle is-6">
                         <span
+                          :class="[
+                            {'is-success': sendOpportunity.status === 'accepted'},
+                            {'is-danger': sendOpportunity.status === 'declined'},
+                            {'is-warning': sendOpportunity.status === 'pending'}
+                          ]"
                           class="tag is-dark subtitle">{{sendOpportunity.status}}</span>
                       </p>
                     </div>
