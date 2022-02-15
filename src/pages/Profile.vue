@@ -96,8 +96,58 @@
             </div>
           </template>
         </div>
-        <div v-if="selectedOpportunities === 'sent'">
-          Sent opportunities
+        <!-- SENT OPPORTUNITIES -->
+        <div
+          v-if="selectedOpportunities === 'sent'"
+          class="columns is-mobile is-multiline">
+          <template v-if="sendOpportunities && sendOpportunities.length > 0">
+            <div
+              v-for="sendOpportunity in sendOpportunities"
+              :key="sendOpportunity.id"
+              class="column is-3-tablet is-6-mobile">
+              <div class="card">
+                <div v-if="sendOpportunity.toExchange" class="card-image">
+                  <figure class="image is-4by3">
+                    <img :src="sendOpportunity.toExchange.image"/>
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-6"><b>Request:</b> {{sendOpportunity.title}}</p>
+                      <p v-if="sendOpportunity.fromExchange" class="title is-6">
+                        <b>Offer:</b> {{sendOpportunity.fromExchange.title}}
+                      </p>
+                      <p v-else class="title is-6">
+                        <b>Offer:</b> {{sendOpportunity.price}}$
+                      </p>
+                      <p class="subtitle is-6">
+                        <span
+                          class="tag is-dark subtitle">{{sendOpportunity.status}}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="content">
+                    <p v-if="sendOpportunity.fromExchange">
+                      {{sendOpportunity.fromExchange.description}}
+                    </p>
+                    <p v-else>
+                      Price exchange
+                    </p>
+                  </div>
+                </div>
+                <footer class="card-footer">
+                  <button
+                    type="button"
+                    class="button is-block is-success is-light is-fullwidth"
+                  >
+                    Check deal
+                  </button>
+                </footer>
+              </div>
+              <br/>
+            </div>
+          </template>
         </div>
       </div>
     </div>
