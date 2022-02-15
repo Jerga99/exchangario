@@ -54,6 +54,18 @@
     <template #activator>
       <button class="button is-block is-success is-light is-fullwidth">View a deal</button>
     </template>
+    <template #footerButtons>
+      <button
+        @click="acceptOpportunity"
+        class="button is-success">
+        Accept Deal
+      </button>
+      <button
+        @click="acceptOpportunity"
+        class="button is-danger">
+        Decline Deal
+      </button>
+    </template>
   </exchange-modal>
 </template>
 
@@ -67,6 +79,14 @@ export default {
     opportunity: {
       required: true,
       type: Object
+    }
+  },
+  methods: {
+    acceptOpportunity() {
+      alert("accepting");
+    },
+    declineOpportunity() {
+      alert("declining");
     }
   }
 }

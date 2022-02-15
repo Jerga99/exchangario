@@ -26,7 +26,11 @@
           <slot />
         </section>
         <footer class="modal-card-foot">
+          <template v-if="$slots.footerButtons">
+            <slot name="footerButtons"/>
+          </template>
           <button
+            v-else
             @click="submitModal"
             :disabled="isDisabled"
             class="button is-success">
