@@ -61,7 +61,7 @@
         Accept Deal
       </button>
       <button
-        @click="acceptOpportunity"
+        @click="declineOpportunity"
         class="button is-danger">
         Decline Deal
       </button>
@@ -83,10 +83,20 @@ export default {
   },
   methods: {
     acceptOpportunity() {
-      alert("accepting");
+      this.$store.dispatch(
+        "opportunity/acceptOpportunity", {
+          opportunity: this.opportunity,
+          onSuccess: () => console.log("Close Modal")
+        }
+      )
     },
     declineOpportunity() {
-      alert("declining");
+      this.$store.dispatch(
+        "opportunity/declineOpportunity", {
+          opportunity: this.opportunity,
+          onSuccess: () => console.log("Close Modal")
+        }
+      )
     }
   }
 }

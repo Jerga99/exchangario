@@ -27,6 +27,14 @@ export default {
     }
   },
   actions: {
+    async acceptOpportunity(_, {opportunity, onSuccess}) {
+      console.log("Accepting: ", opportunity);
+      onSuccess();
+    },
+    async declineOpportunity(_, {opportunity, onSuccess}) {
+      console.log("Declining: ", opportunity);
+      onSuccess();
+    },
     async getOpportunities({rootState, dispatch, commit}) {
       const { id } = rootState.user.data;
       if (!id) {
