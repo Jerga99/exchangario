@@ -26,11 +26,13 @@
               />
             </div>
             <div
+              @click="selectedOpportunities = 'received'"
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
               <p class="stat-val">Received</p>
               <p class="stat-key">{{opportunities.length}} Opportunities</p>
             </div>
             <div
+              @click="selectedOpportunities = 'sent'"
               class="stats-tab stats-tab-interactive column is-2-tablet is-4-mobile has-text-centered">
               <p class="stat-val">Sent</p>
               <p class="stat-key">{{sendOpportunities.length}} Opportunities</p>
@@ -42,6 +44,7 @@
           </div>
         </div>
         <div
+          v-if="selectedOpportunities === 'received'"
           class="columns is-mobile is-multiline">
           <template v-if="opportunities && opportunities.length > 0">
             <div
@@ -93,6 +96,9 @@
             </div>
           </template>
         </div>
+        <div v-if="selectedOpportunities === 'sent'">
+          Sent opportunities
+        </div>
       </div>
     </div>
   </div>
@@ -103,6 +109,11 @@ import ProfileModal from "../components/ProfileModal.vue";
 export default {
   components: {
     ProfileModal
+  },
+  data() {
+    return {
+      selectedOpportunities: "received"
+    }
   },
   setup() {
     return useAuth();
