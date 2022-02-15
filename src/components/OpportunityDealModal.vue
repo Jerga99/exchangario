@@ -1,5 +1,5 @@
 <template>
-  <exchange-modal>
+  <exchange-modal ref="exchangeModal">
     <div>
       <h1>User "{{opportunity.fromUser.username}}" has an amazing offer for you!</h1>
       <template v-if="opportunity.fromExchange">
@@ -81,12 +81,17 @@ export default {
       type: Object
     }
   },
+  computed: {
+    modal() {
+      return this.$refs.exchangeModal
+    }
+  },
   methods: {
     acceptOpportunity() {
       this.$store.dispatch(
         "opportunity/acceptOpportunity", {
           opportunity: this.opportunity,
-          onSuccess: () => console.log("Close Modal")
+          onSuccess: this.modal.close
         }
       )
     },
@@ -94,7 +99,7 @@ export default {
       this.$store.dispatch(
         "opportunity/declineOpportunity", {
           opportunity: this.opportunity,
-          onSuccess: () => console.log("Close Modal")
+          onSuccess: this.modal.close
         }
       )
     }
