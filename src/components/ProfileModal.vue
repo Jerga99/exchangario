@@ -44,7 +44,7 @@
 
     <template #activator>
       <button class="button is-block is-primary is-light is-fullwidth">
-        Custom button
+        Update Profile
       </button>
     </template>
 

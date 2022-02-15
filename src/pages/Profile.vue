@@ -8,20 +8,21 @@
               <figure class="image  header-icon user-profile-image">
                 <img
                   class="is-rounded"
-                  :src="user.avatar"/>
+                  :src="user?.avatar"/>
               </figure>
             </div>
             <div class="column is-4-tablet is-10-mobile name">
               <div class="user-info">
                 <p>
-                  <span class="title is-bold">{{user.username}}</span>
+                  <span class="title is-bold">{{user?.username}}</span>
                   <br/>
                 </p>
                 <p class="tagline">
-                  {{user.info}}
+                  {{user?.info}}
                 </p>
               </div>
               <profile-modal
+                v-if="user"
                 :user="user"
               />
             </div>
@@ -40,7 +41,7 @@
               <p class="stat-key">{{sendOpportunities.length}} Opportunities</p>
             </div>
             <div class="stats-tab column is-2-tablet is-4-mobile has-text-centered">
-              <p class="stat-val">{{user.credit}}</p>
+              <p class="stat-val">{{user?.credit}}</p>
               <p class="stat-key">Credits</p>
             </div>
           </div>
@@ -96,12 +97,9 @@
                   </div>
                 </div>
                 <footer class="card-footer">
-                  <button
-                    type="button"
-                    class="button is-block is-success is-light is-fullwidth"
-                  >
-                    Check deal
-                  </button>
+                  <opportunity-deal-modal
+                    :opportunity="opportunity"
+                  />
                 </footer>
               </div>
               <br/>
@@ -153,14 +151,6 @@
                     </p>
                   </div>
                 </div>
-                <footer class="card-footer">
-                  <button
-                    type="button"
-                    class="button is-block is-success is-light is-fullwidth"
-                  >
-                    Check deal
-                  </button>
-                </footer>
               </div>
               <br/>
             </div>
@@ -172,10 +162,12 @@
 </template>
 <script>
 import useAuth from '../composition/useAuth';
-import ProfileModal from "../components/ProfileModal.vue";
+import ProfileModal from "../components/ProfileModal"
+import OpportunityDealModal from "../components/OpportunityDealModal";
 export default {
   components: {
-    ProfileModal
+    ProfileModal,
+    OpportunityDealModal
   },
   data() {
     return {
