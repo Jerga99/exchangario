@@ -98,6 +98,11 @@
                 </div>
                 <footer class="card-footer">
                   <opportunity-deal-modal
+                    v-if="opportunity.status === 'pending'"
+                    :opportunity="opportunity"
+                  />
+                  <opportunity-result-modal
+                    v-else
                     :opportunity="opportunity"
                   />
                 </footer>
@@ -164,10 +169,12 @@
 import useAuth from '../composition/useAuth';
 import ProfileModal from "../components/ProfileModal"
 import OpportunityDealModal from "../components/OpportunityDealModal";
+import OpportunityResultModal from "../components/OpportunityResultModal.vue";
 export default {
   components: {
     ProfileModal,
-    OpportunityDealModal
+    OpportunityDealModal,
+    OpportunityResultModal
   },
   data() {
     return {
