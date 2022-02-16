@@ -1,5 +1,8 @@
 <template>
-  <exchange-modal ref="exchangeModal">
+  <exchange-modal
+    ref="exchangeModal"
+    :headerText="headerText"
+  >
     <div>
       <h1>User "{{opportunity.fromUser.username}}" has an amazing offer for you!</h1>
       <template v-if="opportunity.fromExchange">
@@ -84,6 +87,11 @@ export default {
   computed: {
     modal() {
       return this.$refs.exchangeModal
+    },
+    headerText() {
+      return this.opportunity.fromExchange
+        ? `Here is an offer for a ${this.opportunity.fromExchange.type}`
+        : "Here is an offer for credits"
     }
   },
   methods: {
