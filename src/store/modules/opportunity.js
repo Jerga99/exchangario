@@ -27,14 +27,16 @@ export default {
     }
   },
   actions: {
-    async acceptOpportunity(_, {opportunity, onSuccess}) {
+    async acceptOpportunity({commit}, {opportunity, onSuccess}) {
       const oppRef = doc(db, "opportunities", opportunity.id);
       await updateDoc(oppRef, {status: "accepted"});
+      commit("changeOpportunityStatus", {id: opportunity.id, status: "accepted"})
       onSuccess();
     },
-    async declineOpportunity(_, {opportunity, onSuccess}) {
+    async declineOpportunity({commit}, {opportunity, onSuccess}) {
       const oppRef = doc(db, "opportunities", opportunity.id);
       await updateDoc(oppRef, {status: "declined"});
+      commit("changeOpportunityStatus", {id: opportunity.id, status: "declined"})
       onSuccess();
     },
     async getOpportunities({rootState, dispatch, commit}) {
@@ -96,6 +98,10 @@ export default {
   mutations: {
     setOpportunities(state, {resource, opportunities}) {
       state[resource] = opportunities;
+    },
+    changeOpportunityStatus(state, {id, status}) {
+      const index = state.opportunities.findIndex(o => o.id === id);
+      state.opportunities[index].status = status;
     }
   }
 }
