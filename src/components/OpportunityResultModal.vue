@@ -20,8 +20,10 @@
     </div>
     <hr>
     <div>
-      <h1>You have accepted deal with user "John"</h1>
-      <div class="catcher">Call "John" on phone: <span class="phone-number">3213721893271</span></div>
+      <h1>You have accepted deal with user "{{opportunity.fromUser.username}}"</h1>
+      <div class="catcher">Call "{{opportunity.fromUser.username}}" on phone:
+        <span class="phone-number">{{opportunity.fromUser.phone}}</span>
+      </div>
     </div>
     <template #activator>
       <button class="button is-block is-success is-light is-fullwidth">Details</button>
