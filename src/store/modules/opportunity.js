@@ -1,6 +1,6 @@
 
 import { db } from "../../db";
-import { doc, Timestamp, addDoc, collection, query, where, getDocs, getDoc } from "firebase/firestore";
+import { doc, Timestamp, addDoc, collection, query, where, getDocs, getDoc, updateDoc } from "firebase/firestore";
 
 const extractDataFromOpportunity = async (opportunity, id) => {
   if (opportunity.fromExchange) {
@@ -28,11 +28,13 @@ export default {
   },
   actions: {
     async acceptOpportunity(_, {opportunity, onSuccess}) {
-      console.log("Accepting: ", opportunity);
+      const oppRef = doc(db, "opportunities", opportunity.id);
+      await updateDoc(oppRef, {status: "accepted"});
       onSuccess();
     },
     async declineOpportunity(_, {opportunity, onSuccess}) {
-      console.log("Declining: ", opportunity);
+      const oppRef = doc(db, "opportunities", opportunity.id);
+      await updateDoc(oppRef, {status: "declined"});
       onSuccess();
     },
     async getOpportunities({rootState, dispatch, commit}) {
