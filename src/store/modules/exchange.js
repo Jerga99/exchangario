@@ -4,7 +4,8 @@ import { db } from "../../db";
 import {
   getDocs, getDoc, doc, addDoc,
   query, where,
-  collectionGroup, collection
+  collectionGroup, collection,
+  Timestamp
 } from "firebase/firestore";
 import slugify from "slugify";
 
@@ -48,6 +49,7 @@ export default {
         lower: true,
         strict: true
       })
+      data.createdAt = Timestamp.fromDate(new Date());
 
       await addDoc(collection(db, "exchanges"), data);
 

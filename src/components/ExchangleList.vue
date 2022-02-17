@@ -41,10 +41,10 @@
             </h2>
             <div class="level">
               <div class="level-left">
-                <div class="item-author">Filip Jerga</div>
+                <div class="item-author">{{exchange.type}}</div>
               </div>
               <div class="level-right">
-                27th December 2019
+                {{exchange.createdAt.toDate().toDateString()}}
               </div>
             </div>
           </div>
