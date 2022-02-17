@@ -9,18 +9,20 @@ import {
 } from "firebase/firestore";
 import slugify from "slugify";
 
+const initPagination = () => ({
+  itemCount: 2,
+  lastItem: null,
+  paginationHistory: [],
+  isFetchingData: false
+})
+
 export default {
   namespaced: true,
   state() {
     return {
       items: [],
       item: {},
-      pagination: {
-        itemCount: 2,
-        lastItem: null,
-        paginationHistory: [],
-        isFetchingData: false,
-      }
+      pagination: initPagination()
     }
   },
   getters: {
@@ -90,6 +92,8 @@ export default {
       }
     },
     async getExchanges({commit, state}) {
+      commit("resetPagination");
+
       const exchangeQuery = query(
         collectionGroup(db, "exchanges"),
         limit(state.pagination.itemCount)
@@ -131,6 +135,9 @@ export default {
     },
     setIsFetchingData(state, isFetching) {
       state.pagination.isFetchingData = isFetching;
+    },
+    resetPagination(state) {
+      state.pagination = initPagination();
     }
   }
 }
