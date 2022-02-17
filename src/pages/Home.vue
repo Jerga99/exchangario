@@ -7,6 +7,7 @@
     <exchange-pagination
       :onNextPage="getMoreExchanges"
       :isFetching="isFetchingMoreData"
+      :page="currentPage"
     />
   </div>
 </template>
@@ -28,6 +29,9 @@ export default {
     },
     isFetchingMoreData() {
       return this.$store.state.exchange.pagination.isFetchingData
+    },
+    currentPage() {
+      return this.$store.getters["exchange/currentPage"];
     }
   },
   created() {

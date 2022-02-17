@@ -23,6 +23,13 @@ export default {
       }
     }
   },
+  getters: {
+    currentPage(state) {
+      if (!state.pagination.paginationHistory) { return 1; }
+
+      return state.pagination.paginationHistory.length;
+    }
+  },
   actions: {
     // context -> state, commit
     async getExchangeBySlug({commit}, slug) {

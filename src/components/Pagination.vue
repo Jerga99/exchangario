@@ -11,7 +11,7 @@
       <li>
         <button
           type="button"
-          class="pagination-link button has-text-weight-bold is-primary">Page 1</button>
+          class="pagination-link button has-text-weight-bold is-primary">Page {{page}}</button>
       </li>
       <li>
         <button
@@ -34,6 +34,10 @@ export default {
     isFetching: {
       type: Boolean,
       default: false
+    },
+    page: {
+      type: Number,
+      default: 1
     }
   }
 }
