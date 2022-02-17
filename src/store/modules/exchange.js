@@ -50,6 +50,8 @@ export default {
       const exchanges = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
 
       commit("setExchanges", exchanges);
+      commit("setLastItem", snapshot.docs[snapshot.docs.length - 1]);
+      commit("setPaginationHistory", snapshot.docs[0]);
     },
     async createExchange({rootState, dispatch}, { data, onSuccess }) {
       const userRef = doc(db, "users", rootState.user.data.id);
@@ -71,8 +73,13 @@ export default {
       state.items = exchanges;
     },
     setExchange(state, exchange) {
-      debugger
       state.item = exchange;
+    },
+    setLastItem(state, item) {
+      state.pagination.lastItem = item;
+    },
+    setPaginationHistory(state, item) {
+      state.pagination.paginationHistory.push(item);
     }
   }
 }
