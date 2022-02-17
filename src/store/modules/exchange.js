@@ -44,6 +44,9 @@ export default {
     async getMoreExchanges({commit, state}, {page}) {
       let queryData;
 
+      if (state.pagination.isFetchingData) { return; }
+      commit("setIsFetchingData", true);
+
       if (page === "next") {
         queryData = query(
           collectionGroup(db, "exchanges"),
@@ -53,6 +56,7 @@ export default {
       }
 
       const snapshot = await getDocs(queryData);
+      commit("setIsFetchingData", false);
       if (snapshot.docs.length === 0) { return; }
 
       const exchanges = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
@@ -102,6 +106,9 @@ export default {
     },
     setPaginationHistory(state, item) {
       state.pagination.paginationHistory.push(item);
+    },
+    setIsFetchingData(state, isFetching) {
+      state.pagination.isFetchingData = isFetching;
     }
   }
 }

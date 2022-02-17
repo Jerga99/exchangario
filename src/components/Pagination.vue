@@ -4,6 +4,7 @@
       <li>
         <button
           @click="() => onNextPage({page: 'previous'})"
+          :disabled="isFetching"
           type="button"
           class="pagination-previous has-text-weight-bold">Previous</button>
       </li>
@@ -15,6 +16,7 @@
       <li>
         <button
           @click="() => onNextPage({page: 'next'})"
+          :disabled="isFetching"
           type="button"
           class="pagination-next has-text-weight-bold">Next</button>
       </li>
@@ -28,6 +30,10 @@ export default {
     onNextPage: {
       type: Function,
       required: true
+    },
+    isFetching: {
+      type: Boolean,
+      default: false
     }
   }
 }

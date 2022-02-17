@@ -6,6 +6,7 @@
     />
     <exchange-pagination
       :onNextPage="getMoreExchanges"
+      :isFetching="isFetchingMoreData"
     />
   </div>
 </template>
@@ -24,6 +25,9 @@ export default {
   computed: {
     exchanges() {
       return this.$store.state.exchange.items;
+    },
+    isFetchingMoreData() {
+      return this.$store.state.exchange.pagination.isFetchingData
     }
   },
   created() {
