@@ -3,7 +3,7 @@
 import { db } from "../../db";
 import {
   getDocs, getDoc, doc, addDoc,
-  query, where, limit, startAfter,
+  query, where, limit, startAfter, startAt,
   collectionGroup, collection,
   Timestamp
 } from "firebase/firestore";
@@ -51,6 +51,21 @@ export default {
         queryData = query(
           collectionGroup(db, "exchanges"),
           startAfter(state.pagination.lastItem),
+          limit(state.pagination.itemCount)
+        )
+      } else {
+        const lastItemIndex = state.pagination.paginationHistory.length - 1;
+        const previousItem = state.pagination.paginationHistory[lastItemIndex - 1];
+
+        if (!previousItem) {
+          commit("setIsFetchingData", false);
+          return;
+        }
+
+        state.pagination.paginationHistory.splice(lastItemIndex, 1);
+        queryData = query(
+          collectionGroup(db, "exchanges"),
+          startAt(previousItem),
           limit(state.pagination.itemCount)
         )
       }
