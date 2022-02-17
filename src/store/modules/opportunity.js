@@ -27,10 +27,21 @@ export default {
     }
   },
   actions: {
-    async acceptOpportunity({commit}, {opportunity, onSuccess}) {
+    async acceptOpportunity({commit, dispatch}, {opportunity, onSuccess}) {
       const oppRef = doc(db, "opportunities", opportunity.id);
       await updateDoc(oppRef, {status: "accepted"});
+
+      if (opportunity.price) {
+        const toUserRef = doc(db, "users", opportunity.toUser.id);
+        await updateDoc(toUserRef, {
+          credit: increment(opportunity.price)
+        })
+
+        commit("user/updateCredit", opportunity.price, {root: true});
+      }
+
       commit("changeOpportunityStatus", {id: opportunity.id, status: "accepted"})
+      dispatch("toast/success", "Opportunity was accepted", {root: true});
       onSuccess();
     },
     async declineOpportunity({commit}, {opportunity, onSuccess}) {
