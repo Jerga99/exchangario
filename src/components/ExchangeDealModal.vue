@@ -2,7 +2,7 @@
 <template>
   <exchange-modal
     :onModalSubmit="createOpportunity"
-    :isDisabled="!isAllowedPrice"
+    :isDisabled="!isAllowedPrice || hasNotEnoughCredit"
   >
     <div class="deal">
       <div class="deal-highlight">{{exchange.user.username}}'s Offer</div>
@@ -58,11 +58,23 @@
           <span>Your price is: </span>
           <span class="deal-highlight">{{offeredPrice}}$</span>
         </div>
+
         <div
           v-if="percentageDifference !== null"
-          :class="`price price-${percentageDiffClass}`">
-          {{priceDifferenceText}}
+          :class="`mb-1 message is-small ${percentageDiffClass}`">
+          <div class="message-body">
+            {{priceDifferenceText}}
+          </div>
         </div>
+
+        <div
+          v-if="hasNotEnoughCredit"
+          class="message is-danger is-small">
+          <div class="message-body">
+            You don't have enough credit for this transaction. Remaining credit: {{user.credit}}$
+          </div>
+        </div>
+
         <i>Allowed difference is not less than {{ALLOWED_PRICE_DIFFERENCE}}%</i>
       </div>
     </div>
@@ -102,6 +114,13 @@ export default {
     user() {
       return this.$store.state.user.data
     },
+    hasNotEnoughCredit() {
+      if (!this.isPriceExchange) {
+        return false;
+      }
+
+      return this.user.credit < this.selectedPrice;
+    },
     offeredPrice() {
       if (this.isPriceExchange) {
         return this.selectedPrice;
@@ -131,7 +150,7 @@ export default {
              this.percentageDifference >= -this.ALLOWED_PRICE_DIFFERENCE
     },
     percentageDiffClass() {
-      return this.isAllowedPrice ? "allowed" : "declined";
+      return this.isAllowedPrice ? "is-success" : "is-danger";
     }
   },
   watch: {
