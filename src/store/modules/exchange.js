@@ -3,7 +3,7 @@
 import { db } from "../../db";
 import {
   getDocs, getDoc, doc, addDoc,
-  query, where,
+  query, where, limit,
   collectionGroup, collection,
   Timestamp
 } from "firebase/firestore";
@@ -14,7 +14,13 @@ export default {
   state() {
     return {
       items: [],
-      item: {}
+      item: {},
+      pagination: {
+        itemCount: 2,
+        lastItem: null,
+        paginationHistory: [],
+        isFetchingData: false,
+      }
     }
   },
   actions: {
@@ -35,8 +41,11 @@ export default {
       exchange.user.id = userSnap.id;
       commit("setExchange", exchange);
     },
-    async getExchanges({commit}) {
-      const exchangeQuery = query(collectionGroup(db, "exchanges"));
+    async getExchanges({commit, state}) {
+      const exchangeQuery = query(
+        collectionGroup(db, "exchanges"),
+        limit(state.pagination.itemCount)
+      );
       const snapshot = await getDocs(exchangeQuery);
       const exchanges = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
 
