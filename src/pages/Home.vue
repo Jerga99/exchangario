@@ -4,7 +4,9 @@
     <exchangle-list
       :exchanges="exchanges"
     />
-    <exchange-pagination />
+    <exchange-pagination
+      :onNextPage="getMoreExchanges"
+    />
   </div>
 </template>
 
@@ -26,6 +28,11 @@ export default {
   },
   created() {
     this.$store.dispatch("exchange/getExchanges");
+  },
+  methods: {
+    getMoreExchanges({page}) {
+      console.log("Getting more exchanges from: ", page);
+    }
   }
 }
 </script>

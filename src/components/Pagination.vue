@@ -3,6 +3,7 @@
     <ul class="pagination-list">
       <li>
         <button
+          @click="() => onNextPage({page: 'previous'})"
           type="button"
           class="pagination-previous has-text-weight-bold">Previous</button>
       </li>
@@ -13,9 +14,21 @@
       </li>
       <li>
         <button
+          @click="() => onNextPage({page: 'next'})"
           type="button"
           class="pagination-next has-text-weight-bold">Next</button>
       </li>
     </ul>
   </nav>
 </template>
+
+<script>
+export default {
+  props: {
+    onNextPage: {
+      type: Function,
+      required: true
+    }
+  }
+}
+</script>
