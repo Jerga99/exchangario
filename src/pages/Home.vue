@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     getMoreExchanges({page}) {
-      console.log("Getting more exchanges from: ", page);
+      this.$store.dispatch("exchange/getMoreExchanges", {page});
     }
   }
 }

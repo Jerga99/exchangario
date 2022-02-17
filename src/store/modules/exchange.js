@@ -3,7 +3,7 @@
 import { db } from "../../db";
 import {
   getDocs, getDoc, doc, addDoc,
-  query, where, limit,
+  query, where, limit, startAfter,
   collectionGroup, collection,
   Timestamp
 } from "firebase/firestore";
@@ -40,6 +40,28 @@ export default {
       exchange.user = userSnap.data();
       exchange.user.id = userSnap.id;
       commit("setExchange", exchange);
+    },
+    async getMoreExchanges({commit, state}, {page}) {
+      let queryData;
+
+      if (page === "next") {
+        queryData = query(
+          collectionGroup(db, "exchanges"),
+          startAfter(state.pagination.lastItem),
+          limit(state.pagination.itemCount)
+        )
+      }
+
+      const snapshot = await getDocs(queryData);
+      if (snapshot.docs.length === 0) { return; }
+
+      const exchanges = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+      commit("setExchanges", exchanges);
+      commit("setLastItem", snapshot.docs[snapshot.docs.length - 1]);
+
+      if (page === "next") {
+        commit("setPaginationHistory", snapshot.docs[0]);
+      }
     },
     async getExchanges({commit, state}) {
       const exchangeQuery = query(
