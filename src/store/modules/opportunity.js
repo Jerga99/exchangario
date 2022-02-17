@@ -1,6 +1,6 @@
 
 import { db } from "../../db";
-import { doc, Timestamp, addDoc, collection, query, where, getDocs, getDoc, updateDoc } from "firebase/firestore";
+import { increment, doc, Timestamp, addDoc, collection, query, where, getDocs, getDoc, updateDoc } from "firebase/firestore";
 
 const extractDataFromOpportunity = async (opportunity, id) => {
   if (opportunity.fromExchange) {
@@ -73,7 +73,7 @@ export default {
 
       commit("setOpportunities", {resource: "sendOpportunities", opportunities})
     },
-    async createOpportunity({dispatch}, {data, onSuccess}) {
+    async createOpportunity({dispatch, commit}, {data, onSuccess}) {
       const opportunity = {
         title: data.title,
         createdAt: Timestamp.fromDate(new Date()),
@@ -90,8 +90,15 @@ export default {
       }
 
       await addDoc(collection(db, "opportunities"), opportunity);
-      dispatch("toast/success", "Opportunity was send!", {root: true});
 
+      if (opportunity.price) {
+        await updateDoc(opportunity.fromUser, {
+          credit: increment(-opportunity.price)
+        })
+        commit("user/updateCredit", -opportunity.price, {root: true});
+      }
+
+      dispatch("toast/success", "Opportunity was send!", {root: true});
       onSuccess();
     }
   },
