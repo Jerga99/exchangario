@@ -44,10 +44,19 @@ export default {
       dispatch("toast/success", "Opportunity was accepted", {root: true});
       onSuccess();
     },
-    async declineOpportunity({commit}, {opportunity, onSuccess}) {
+    async declineOpportunity({commit, dispatch}, {opportunity, onSuccess}) {
       const oppRef = doc(db, "opportunities", opportunity.id);
       await updateDoc(oppRef, {status: "declined"});
+
+      if (opportunity.price) {
+        const fromUserRef = doc(db, "users", opportunity.fromUser.id);
+        await updateDoc(fromUserRef, {
+          credit: increment(opportunity.price)
+        })
+      }
+
       commit("changeOpportunityStatus", {id: opportunity.id, status: "declined"})
+      dispatch("toast/success", "Opportunity was declined!", {root: true});
       onSuccess();
     },
     async getOpportunities({rootState, dispatch, commit}) {
