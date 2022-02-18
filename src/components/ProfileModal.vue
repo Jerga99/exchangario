@@ -14,7 +14,12 @@
         <label class="title">Avatar</label>
         <div class="file has-name">
           <label class="file-label">
-            <input class="file-input" type="file" name="resume">
+            <input
+              @change="handleUpload"
+              class="file-input"
+              type="file"
+              name="resume"
+            >
             <span class="file-cta">
               <span class="file-icon">
                 <font-awesome-icon
@@ -94,6 +99,15 @@
           data: this.userProfile,
           onSuccess: () => this.modal.close()
         })
+      },
+      handleUpload(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(file);
+
+        reader.onload = function() {
+          console.log(reader.result);
+        }
       }
     }
   }
