@@ -63,6 +63,11 @@ export default {
     },
     async updateProfile({commit, dispatch}, { data, onSuccess }) {
       const userRef = doc(db, "users", data.id);
+
+      if (data.exchanges) {
+        delete data.exchanges;
+      }
+
       await updateDoc(userRef, data);
       commit("updateProfile", data);
       dispatch("toast/success", "Profile has been updated!", {root: true});
@@ -134,7 +139,7 @@ export default {
      }
     },
     async createUserProfile(_, {id, ...profile}) {
-      await setDoc(doc(db, "users", id), profile);
+      await setDoc(doc(db, "users", id), {...profile, id});
     }
   },
   mutations: {

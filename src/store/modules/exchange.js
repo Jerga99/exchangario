@@ -4,7 +4,7 @@ import { db } from "../../db";
 import {
   getDocs, getDoc, doc, addDoc,
   query, where, limit, startAfter, startAt,
-  collectionGroup, collection,
+  collection,
   Timestamp
 } from "firebase/firestore";
 import slugify from "slugify";
@@ -70,7 +70,7 @@ export default {
 
       if (page === "next") {
         queryData = query(
-          collectionGroup(db, "exchanges"),
+          collection(db, "exchanges"),
           startAfter(state.pagination.lastItem),
           limit(state.pagination.itemCount)
         )
@@ -85,7 +85,7 @@ export default {
 
         state.pagination.paginationHistory.splice(lastItemIndex, 1);
         queryData = query(
-          collectionGroup(db, "exchanges"),
+          collection(db, "exchanges"),
           startAt(previousItem),
           limit(state.pagination.itemCount)
         )
@@ -107,7 +107,7 @@ export default {
       commit("resetPagination");
 
       const exchangeQuery = query(
-        collectionGroup(db, "exchanges"),
+        collection(db, "exchanges"),
         limit(state.pagination.itemCount)
       );
       const snapshot = await getDocs(exchangeQuery);
