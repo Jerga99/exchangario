@@ -30,11 +30,13 @@
                 Choose a file…
               </span>
             </span>
-            <span class="file-name">
-              Screen Shot 2017-07-29 at 15.54.25.png
-            </span>
           </label>
         </div>
+        <img
+          v-if="userProfile.avatar"
+          class="image-preview"
+          :src="userProfile.avatar"
+        />
       </div>
       <div class="field">
         <label class="title">Info about user</label>
@@ -109,10 +111,19 @@
         reader.onload = function() {
           self.$store.dispatch("user/uploadImage", {
             bytes: reader.result,
-            name: file.name
+            name: file.name,
+            onSuccess: (url) => {
+              self.userProfile.avatar = url;
+            }
           })
         }
       }
     }
   }
 </script>
+
+<style scoped>
+  .image-preview {
+    height: 200px;
+  }
+</style>
