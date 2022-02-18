@@ -94,6 +94,19 @@ export default {
   },
   setup() {
     return useAuth();
+  },
+  created() {
+    window.addEventListener("resize", this.handleWindowResizing);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.handleWindowResizing);
+  },
+  methods: {
+    handleWindowResizing(e) {
+      if (this.isMenuOpen && e.target.innerWidth > 1020) {
+        this.isMenuOpen = false;
+      }
+    }
   }
 }
 </script>
