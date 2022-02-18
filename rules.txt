@@ -7,7 +7,11 @@ service cloud.firestore {
     }
 
     match /users/{userId} {
-    	allow read, write: if isLoggedIn();
+    	allow read: if isLoggedIn();
+      allow create: if
+      	isLoggedIn() && request.auth.uid == request.resource.data.id;
+      allow update: if
+      	isLoggedIn() && request.auth.uid == resource.data.id;
     }
 
     match /exchanges/{exchangeId} {
