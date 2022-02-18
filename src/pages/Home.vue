@@ -25,9 +25,14 @@ export default {
     ExchangePagination,
     ExchangeHero
   },
+  data() {
+    return {
+      searchedExchangeTitle: ""
+    }
+  },
   computed: {
     exchanges() {
-      return this.$store.state.exchange.items;
+      return this.$store.getters["exchange/filterExchanges"](this.searchedExchangeTitle);
     },
     isFetchingMoreData() {
       return this.$store.state.exchange.pagination.isFetchingData
@@ -44,7 +49,7 @@ export default {
       this.$store.dispatch("exchange/getMoreExchanges", {page});
     },
     filterExchanges(searchValue) {
-      console.log(searchValue);
+      this.searchedExchangeTitle = searchValue;
     }
   }
 }
