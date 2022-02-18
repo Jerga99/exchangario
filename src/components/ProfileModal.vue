@@ -101,12 +101,16 @@
         })
       },
       handleUpload(e) {
+        const self = this;
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
 
         reader.onload = function() {
-          console.log(reader.result);
+          self.$store.dispatch("user/uploadImage", {
+            bytes: reader.result,
+            name: file.name
+          })
         }
       }
     }

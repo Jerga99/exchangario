@@ -31,6 +31,10 @@ export default {
     )
   },
   actions: {
+    uploadImage(_, { bytes, name}) {
+      console.log(bytes);
+      console.log(name);
+    },
     onAuthChange({dispatch, commit}, callback) {
       commit("setAuthIsProcessing", true);
       onAuthStateChanged(getAuth(), async (user) => {
