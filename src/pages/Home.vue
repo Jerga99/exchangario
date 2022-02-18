@@ -1,6 +1,8 @@
 <template>
   <div id="exchangario">
-    <exchange-hero />
+    <exchange-hero
+      :onSearch="filterExchanges"
+    />
     <exchangle-list
       :exchanges="exchanges"
     />
@@ -40,6 +42,9 @@ export default {
   methods: {
     getMoreExchanges({page}) {
       this.$store.dispatch("exchange/getMoreExchanges", {page});
+    },
+    filterExchanges(searchValue) {
+      console.log(searchValue);
     }
   }
 }

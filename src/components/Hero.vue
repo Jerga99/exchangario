@@ -38,6 +38,12 @@
 </template>
 <script>
 export default {
+  props: {
+    onSearch: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     return {
       searchedValue: ""
@@ -47,6 +53,7 @@ export default {
     handleSearch(e) {
       const { value } = e.target;
       this.searchedValue = value;
+      this.onSearch(value);
     }
   }
 }
