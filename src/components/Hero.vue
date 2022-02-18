@@ -22,12 +22,13 @@
             </div>
             <div class="level-item">
               <input
+                @input="handleSearch"
                 type="text"
                 class="input"
                 placeholder="Driller">
             </div>
             <div class="level-item">
-              <span>Searching "Coding"</span>
+              <span v-if="searchedValue">Searching "{{searchedValue}}"</span>
             </div>
           </div>
         </div>
@@ -35,6 +36,21 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      searchedValue: ""
+    }
+  },
+  methods: {
+    handleSearch(e) {
+      const { value } = e.target;
+      this.searchedValue = value;
+    }
+  }
+}
+</script>
 
 
 <style scoped lang="scss">
