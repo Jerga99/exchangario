@@ -29,7 +29,11 @@ service cloud.firestore {
     }
 
     match /opportunities/{opportunityId} {
-    	allow read, write: if isLoggedIn();
+    	allow read: if isLoggedIn();
+      allow create: if isLoggedIn();
+      allow update: if isLoggedIn() &&
+       (request.resource.data.status == "accepted" || request.resource.data.status == "declined") &&
+       resource.data.toUser == path("/databases/(default)/documents/users/" + request.auth.uid);
     }
   }
 }
