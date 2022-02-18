@@ -12,9 +12,24 @@
       </div>
       <div class="field">
         <label class="title">Avatar</label>
-        <input
-          v-model="userProfile.avatar"
-          class="input">
+        <div class="file has-name">
+          <label class="file-label">
+            <input class="file-input" type="file" name="resume">
+            <span class="file-cta">
+              <span class="file-icon">
+                <font-awesome-icon
+                  icon="upload"
+                />
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+            <span class="file-name">
+              Screen Shot 2017-07-29 at 15.54.25.png
+            </span>
+          </label>
+        </div>
       </div>
       <div class="field">
         <label class="title">Info about user</label>
