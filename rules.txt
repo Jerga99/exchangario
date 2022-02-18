@@ -12,7 +12,16 @@ service cloud.firestore {
 
     match /exchanges/{exchangeId} {
     	allow read: if true;
-      allow write: if isLoggedIn();
+      allow write: if
+      	isLoggedIn() &&
+        request.resource.data.title is string &&
+        request.resource.data.title.size() > 10 &&
+        request.resource.data.description is string &&
+        request.resource.data.image is string &&
+        request.resource.data.price is number &&
+        request.resource.data.price > 0 &&
+        request.resource.data.country is string &&
+        request.resource.data.city is string;
     }
 
     match /opportunities/{opportunityId} {

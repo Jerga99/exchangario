@@ -119,7 +119,7 @@
 
 <script>
 import useVuelidate from '@vuelidate/core'
-import { required, minLength, minValue, url, helpers } from '@vuelidate/validators'
+import { required, minValue, url, helpers } from '@vuelidate/validators'
 import FormErrors from "../components/FormErrors.vue";
 
 const setupInitialData = () => ({
@@ -147,7 +147,7 @@ export default {
       form: {
         title: {
           required: helpers.withMessage("Title cannot by empty!", required),
-          minLength: helpers.withMessage("Title length should be at least 10!", minLength(10)),
+          // minLength: helpers.withMessage("Title length should be at least 10!", minLength(10)),
         },
         description: { required },
         type: { required },
