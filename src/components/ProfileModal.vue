@@ -32,6 +32,13 @@
             </span>
           </label>
         </div>
+        <progress
+          class="progress"
+          :value="progress"
+          max="100"
+        >
+          {{progress}}%
+        </progress>
         <img
           v-if="userProfile.avatar"
           class="image-preview"
@@ -87,7 +94,8 @@
     },
     data () {
       return {
-        userProfile: { ...this.user }
+        userProfile: { ...this.user },
+        progress: 0
       }
     },
     computed: {
@@ -114,6 +122,9 @@
             name: file.name,
             onSuccess: (url) => {
               self.userProfile.avatar = url;
+            },
+            onProgress: (progress) => {
+              self.progress = progress;
             }
           })
         }
@@ -125,5 +136,9 @@
 <style scoped>
   .image-preview {
     height: 200px;
+  }
+
+  .progress {
+    margin-top: 15px;
   }
 </style>

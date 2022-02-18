@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword
 } from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc, query, collection, where, getDocs } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db } from "../../db";
 
 export default {
@@ -32,13 +32,20 @@ export default {
     )
   },
   actions: {
-    async uploadImage(_, { bytes, name, onSuccess}) {
+    async uploadImage(_, { bytes, name, onSuccess, onProgress}) {
       const storage = getStorage();
       const storageRef = ref(storage, name);
+      const uploadTask = uploadBytesResumable(storageRef, bytes);
 
-      const uploadResult = await uploadBytes(storageRef, bytes)
-      const downloadUrl = await getDownloadURL(uploadResult.ref);
-      onSuccess(downloadUrl);
+      uploadTask.on("state_changed", (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        onProgress(progress);
+      }, (error) => {
+        console.error(error.message);
+      }, async () => {
+        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+        onSuccess(downloadUrl);
+      })
     },
     onAuthChange({dispatch, commit}, callback) {
       commit("setAuthIsProcessing", true);
