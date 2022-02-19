@@ -32,6 +32,7 @@ export default {
   },
   computed: {
     exchanges() {
+      console.log();
       return this.$store.getters["exchange/filterExchanges"](this.searchedExchangeTitle);
     },
     isFetchingMoreData() {
