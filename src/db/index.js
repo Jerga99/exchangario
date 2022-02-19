@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBeLYVIwvoBjbDrlVrlFJi5hUjMaPBqn4Y",
-  authDomain: "exchangario-37abd.firebaseapp.com",
-  projectId: "exchangario-37abd",
-  storageBucket: "exchangario-37abd.appspot.com",
-  messagingSenderId: "772340197654",
-  appId: "1:772340197654:web:4933f9acdfa0c6ae0d0837"
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_SENDER_ID,
+  appId: process.env.VUE_APP_APP_ID
 };
 
 initializeApp(firebaseConfig);
