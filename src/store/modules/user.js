@@ -29,7 +29,10 @@ export default {
       state.data &&
       exchangeUserId &&
       state.data.id === exchangeUserId
-    )
+    ),
+    authUser(state) {
+      return state.data.id;
+    }
   },
   actions: {
     async uploadImage(_, { bytes, name, onSuccess, onProgress}) {

@@ -9,8 +9,19 @@
         <div class="container">
           <div class="columns">
             <div class="column is-9">
-              <h1 class="title">
+              <h1 class="title is-flex is-justified">
                 {{exchange.title}}
+                <router-link
+                v-if="isExchangeOwner"
+                :to="{name: 'ExchangeUpdate', params: {id: exchange.id}}"
+                class="item-link is-flex ml-4 is-align-self-center"
+                >
+                  <button
+                    class="button is-small is-primary is-outlined"
+                  >
+                    Update
+                  </button>
+                </router-link>
               </h1>
               <h2 class="subtitle">
                 {{exchange.type}}

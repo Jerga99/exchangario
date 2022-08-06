@@ -2,10 +2,10 @@
 
 import { db } from "../../db";
 import {
-  getDocs, getDoc, doc, addDoc,
+  getDocs, getDoc, doc, addDoc, updateDoc,
   query, where, limit, startAfter, startAt,
   collection,
-  Timestamp
+  Timestamp,
 } from "firebase/firestore";
 import slugify from "slugify";
 
@@ -61,6 +61,17 @@ export default {
       exchange.user = userSnap.data();
       exchange.user.id = userSnap.id;
       commit("setExchange", exchange);
+    },
+    async getExchangeById(_, id) {
+      const docQuery = doc(db, "exchanges", id)
+      const querySnap = await getDoc(docQuery);
+      const exchange = querySnap.data();
+      exchange.id = querySnap.id;
+
+      const userSnap = await getDoc(exchange.user);
+      exchange.user = userSnap.data();
+      exchange.user.id = userSnap.id;
+      return exchange;
     },
     async getMoreExchanges({commit, state}, {page}) {
       let queryData;
@@ -129,6 +140,11 @@ export default {
       await addDoc(collection(db, "exchanges"), data);
 
       dispatch("toast/success", "Exchange was created succesfuly!", {root: true});
+      onSuccess();
+    },
+    async updateExchange(_, { data, id, onSuccess }) {
+      const exchangeRef = doc(db, "exchanges", id);
+      await updateDoc(exchangeRef, data);
       onSuccess();
     }
   },
